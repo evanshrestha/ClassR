@@ -20,6 +20,7 @@
 		07B7B14E219602A90049817E /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07B7B14D219602A90049817E /* OpenSans-Bold.ttf */; };
 		07B7B150219603030049817E /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07B7B14F219603020049817E /* OpenSans-Light.ttf */; };
 		07B7B1522196041F0049817E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07B7B1512196041F0049817E /* GoogleService-Info.plist */; };
+		07B7B154219608AA0049817E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B153219608AA0049817E /* Status.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		07B7B14D219602A90049817E /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		07B7B14F219603020049817E /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		07B7B1512196041F0049817E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		07B7B153219608AA0049817E /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				07B7B14F219603020049817E /* OpenSans-Light.ttf */,
 				07B7B1452195F74F0049817E /* NewsTableView.swift */,
 				07B7B1472195F74F0049817E /* NewsTableViewCell.swift */,
+				07B7B153219608AA0049817E /* Status.swift */,
 				07B7B1462195F74F0049817E /* NewsViewController.swift */,
 				07B7B1322195F6EC0049817E /* ViewController.swift */,
 				07B7B1342195F6EC0049817E /* Main.storyboard */,
@@ -165,6 +168,7 @@
 			files = (
 				07B7B1332195F6EC0049817E /* ViewController.swift in Sources */,
 				07B7B1312195F6EC0049817E /* AppDelegate.swift in Sources */,
+				07B7B154219608AA0049817E /* Status.swift in Sources */,
 				07B7B14A2195F74F0049817E /* NewsTableViewCell.swift in Sources */,
 				07B7B1482195F74F0049817E /* NewsTableView.swift in Sources */,
 				07B7B1492195F74F0049817E /* NewsViewController.swift in Sources */,
