@@ -8,27 +8,34 @@
 
 import UIKit
 
-class NewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NewsViewController: UITableViewController {
     @IBOutlet weak var newsTableView: NewsTableView!
     
+    var testCourse : Course?
+    var testStatus : Status?
     
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsTableViewCell
+        cell.classNameLabel.text = testStatus!.course.courseName
+        cell.newsTextLabel.text = testStatus!.statusText
+        cell.status = testStatus!
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(200);
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        testCourse = Course(courseName: "Jazz Appreciation", courseDepartment: "MUS", courseNumber: "307", courseInstructor: "Jeff Hellmer", courseID: "2312", coursePeriod: "Fall 2018")
+        testStatus = Status(course: testCourse!, statusText: "ASDF")
 
         // Do any additional setup after loading the view.
     }

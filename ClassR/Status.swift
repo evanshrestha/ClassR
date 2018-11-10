@@ -9,5 +9,12 @@
 import Foundation
 
 class Status {
+    var course : Course
+    var statusText : String = ""
+    var datePosted : Date = Date()
     
+    init(course : Course, statusText: String) {
+        self.course = course
+        self.statusText = statusText
+    }
 }

@@ -14,9 +14,17 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var newsTextLabel: UILabel!
+    @IBOutlet weak var newsView: UIView!
+    @IBOutlet weak var newsContentView: UIView!
+    
+    var status: Status?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        newsView.layer.cornerRadius = CGFloat(10)
+        likeButton.roundCorners([.bottomLeft], radius: 10)
+        commentsButton.roundCorners([.bottomRight], radius: 10)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,7 +38,7 @@ class NewsTableViewCell: UITableViewCell {
             likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
         } else {
             likeButton.setTitle("Liked", for: .normal)
-            likeButton.setTitleColor(UIColor(hexString: "#4B96AB"), for: .normal)
+            likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
         }
         
     }
@@ -65,4 +73,15 @@ extension UIColor {
         let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return String(format:"#%06x", rgb)
     }
+}
+
+extension UIView {
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+    
 }
