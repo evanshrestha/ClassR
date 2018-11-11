@@ -15,6 +15,7 @@ class Course {
     var courseInstructor: String = "" // Jeff Hellmer
     var courseID : String = "" // 54145
     var coursePeriod : String = "" // Fall 2018
+    var databaseID : String = ""
     
     init(courseName: String, courseDepartment: String, courseNumber: String, courseInstructor: String, courseID: String, coursePeriod: String) {
         self.courseName = courseName

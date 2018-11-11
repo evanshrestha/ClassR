@@ -7,21 +7,32 @@
 //
 
 import UIKit
+import Firebase
 
 class NewsViewController: UITableViewController {
+    
+    
+    
     @IBOutlet weak var newsTableView: NewsTableView!
     
     var testCourse : Course?
     var testStatus : Status?
     
+    var statuses : NSDictionary = NSDictionary()
+    var courses : NSDictionary = NSDictionary()
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return statuses.count
     }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsTableViewCell
-        cell.classNameLabel.text = testStatus!.course.courseName
-        cell.newsTextLabel.text = testStatus!.statusText
+        let statusText : String = (statuses.allValues[indexPath.row] as! NSDictionary)["statusText"]! as! String
+        let courseDatabaseID : String = (statuses.allValues[indexPath.row] as! NSDictionary)["courseReferenceID"]! as! String
+        let courseName : String = (courses[courseDatabaseID] as! NSDictionary)["courseName"] as! String
+        cell.classNameLabel.text = courseName
+        cell.newsTextLabel.text = statusText
         cell.status = testStatus!
         return cell
     }
@@ -35,8 +46,39 @@ class NewsViewController: UITableViewController {
         super.viewDidLoad()
         
         testCourse = Course(courseName: "Jazz Appreciation", courseDepartment: "MUS", courseNumber: "307", courseInstructor: "Jeff Hellmer", courseID: "2312", coursePeriod: "Fall 2018")
+        testCourse!.databaseID = "-LQwSgE9YtZBFIl3tcHu"
         testStatus = Status(course: testCourse!, statusText: "ASDF")
-
+        
+        var ref: DatabaseReference!
+//        ref = Database.database().reference().child("courses").childByAutoId()
+//        ref.child("courseName").setValue(testCourse!.courseName)
+//        ref.child("courseDepartment").setValue(testCourse!.courseDepartment)
+//        ref.child("courseNumber").setValue(testCourse!.courseNumber)
+//        ref.child("courseInstructor").setValue(testCourse!.courseInstructor)
+//        ref.child("courseID").setValue(testCourse!.courseID)
+//        ref.child("coursePeriod").setValue(testCourse!.coursePeriod)
+        
+//        ref = Database.database().reference().child("statuses").childByAutoId()
+//        ref.child("courseReferenceID").setValue(testStatus!.course.databaseID)
+//        ref.child("statusText").setValue("hello tatas")
+       
+        
+        Database.database().reference().child("statuses").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.statuses = snapshot.value as! NSDictionary
+            self.newsTableView.reloadData()
+        }) {
+            (error) in
+            print(error.localizedDescription)
+        }
+        Database.database().reference().child("courses").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.courses = snapshot.value as! NSDictionary
+            self.newsTableView.reloadData()
+        }) {
+            (error) in
+            print(error.localizedDescription)
+        }
+        
+        
         // Do any additional setup after loading the view.
     }
     

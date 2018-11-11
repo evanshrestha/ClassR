@@ -17,31 +17,52 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var newsContentView: UIView!
     
-    var status: Status?
+    var liked : Bool = false
+    var status : Status?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
+    @objc func onDoubleTap(sender: UIGestureRecognizer){
+        onLike()
+        print(UIDevice.current.identifierForVendor?.uuidString)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        newsView.layer.cornerRadius = CGFloat(10)
-        likeButton.roundCorners([.bottomLeft], radius: 10)
-        commentsButton.roundCorners([.bottomRight], radius: 10)
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(onDoubleTap(sender:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTapGesture)
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    @IBAction func onLikeTap(_ sender: Any) {
-        if (likeButton.currentTitle! == "Liked") {
-            likeButton.setTitle("Like", for: .normal)
-            likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
-        } else {
+    
+    func updateLikeButton() {
+        if (liked) {
             likeButton.setTitle("Liked", for: .normal)
             likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
+        } else {
+            likeButton.setTitle("Like", for: .normal)
+            likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
         }
-        
     }
+    
+    @IBAction func onLikeTap(_ sender: Any) {
+        onLike()
+    }
+    
+    func onLike() {
+        liked = !liked
+        updateLikeButton()
+    }
+    
     @IBAction func onCommentsTap(_ sender: Any) {
     }
     

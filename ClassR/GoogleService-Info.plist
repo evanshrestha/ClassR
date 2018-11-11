@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>109354639645-te71fnrepcmat3j1mcs21f2l3c1p8qll.apps.googleusercontent.com</string>
+	<string>109354639645-oen34bubgqmga6lcgl8kc890srcij1cl.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.109354639645-te71fnrepcmat3j1mcs21f2l3c1p8qll</string>
+	<string>com.googleusercontent.apps.109354639645-oen34bubgqmga6lcgl8kc890srcij1cl</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBml3UuFc98KznKXxyhM47dbABX6WFyUdw</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.gmail.evanshrestha</string>
+	<string>com.gmail.evanshrestha.ClassR</string>
 	<key>PROJECT_ID</key>
 	<string>classr-3418e</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:109354639645:ios:c53032a03d6c59de</string>
+	<string>1:109354639645:ios:111ba0093ded6c44</string>
 	<key>DATABASE_URL</key>
 	<string>https://classr-3418e.firebaseio.com</string>
 </dict>
