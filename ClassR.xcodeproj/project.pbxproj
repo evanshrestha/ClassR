@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC2FE2199024D00DAC1A1 /* Pulsing.swift */; };
 		07B7B1312195F6EC0049817E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B1302195F6EC0049817E /* AppDelegate.swift */; };
 		07B7B1332195F6EC0049817E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B1322195F6EC0049817E /* ViewController.swift */; };
 		07B7B1362195F6EC0049817E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07B7B1342195F6EC0049817E /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		077BC2FE2199024D00DAC1A1 /* Pulsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsing.swift; sourceTree = "<group>"; };
 		07B7B12D2195F6EC0049817E /* ClassR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B7B1302195F6EC0049817E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07B7B1322195F6EC0049817E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				07B7B1302195F6EC0049817E /* AppDelegate.swift */,
 				07B7B14F219603020049817E /* OpenSans-Light.ttf */,
 				07B7B1452195F74F0049817E /* NewsTableView.swift */,
+				077BC2FE2199024D00DAC1A1 /* Pulsing.swift */,
 				07B7B1472195F74F0049817E /* NewsTableViewCell.swift */,
 				07B7B153219608AA0049817E /* Status.swift */,
 				07B7B15D21969FCC0049817E /* Course.swift */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */,
 				07B7B15E21969FCC0049817E /* Course.swift in Sources */,
 				07B7B1562196315C0049817E /* CommentViewController.swift in Sources */,
 				07B7B158219632E40049817E /* CommentTableView.swift in Sources */,

@@ -32,6 +32,7 @@ class PostViewController: UIViewController {
                     var newPostReference = ref.child("statuses").childByAutoId()
                     newPostReference.child("courseReferenceID").setValue(courseDatabaseReference)
                     newPostReference.child("statusText").setValue(self.postTextField.text!)
+                    newPostReference.child("datePosted").setValue(Date().description)
                     self.closePostViewController()
                 }
             }
@@ -52,6 +53,7 @@ class PostViewController: UIViewController {
     
     func closePostViewController () {
         dismiss(animated: true, completion: nil)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

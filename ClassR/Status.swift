@@ -18,18 +18,4 @@ class Status {
         self.statusText = statusText
     }
     
-//    static func loadStatusFromDictionary(statusDict : NSDictionary) -> [String : Status]{
-//        var statuses : [String : Status] = [:]
-//        
-//        for elt in statusDict {
-//            let statusInformation : NSDictionary = (elt.value as! NSDictionary)
-//            let statusText = statusInformation["statusText"] as! String
-//            let courseReferenceID = statusInformation["courseReferenceID"] as! String
-//            
-//            
-//            
-//        }
-//        
-//        return statuses
-//    }
 }

@@ -26,6 +26,16 @@ class NewsTableViewCell: UITableViewCell {
     
     @objc func onDoubleTap(sender: UIGestureRecognizer){
         onLike()
+        let pulse = Pulsing(numberOfPulses: 1, radius: 90, position: sender.location(in: newsView))
+        if (liked) {
+            pulse.animationDuration = 0.8
+            pulse.backgroundColor = UIColor(hexString: "#00A8E8").cgColor
+        } else {
+            pulse.animationDuration = 0.4
+            pulse.backgroundColor = UIColor(hexString: "#6F7179").cgColor
+        }
+        self.layer.insertSublayer(pulse, above: newsView.layer)
+        
         print(UIDevice.current.identifierForVendor?.uuidString)
     }
     

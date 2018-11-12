@@ -124,6 +124,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ClassR" id="52W-mA-vsV">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="lL9-Y9-BcX">
+                            <connections>
+                                <action selector="onRefreshButtonClick:" destination="lA8-3b-EiK" id="Y9w-z2-7h6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="IPt-fj-obR">
                             <connections>
                                 <segue destination="8yq-rI-j0t" kind="presentation" id="Xl0-1b-t8d"/>
