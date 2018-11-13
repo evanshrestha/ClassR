@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class PostViewController: UIViewController {
+class PostViewController: UIViewController, UITextViewDelegate{
 
     @IBOutlet weak var insideView: UIView!
     @IBOutlet var outsideTapGestureRecognizer: UITapGestureRecognizer!
@@ -61,6 +61,10 @@ class PostViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
     /*
     // MARK: - Navigation

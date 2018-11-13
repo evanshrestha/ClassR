@@ -28,6 +28,7 @@
 		07D81AE92199ECD100D76926 /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D81AE82199ECD100D76926 /* SchoolViewController.swift */; };
 		07D81AEE219AA38D00D76926 /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D81AEC219AA38D00D76926 /* SchoolTableViewCell.swift */; };
 		07D81AEF219AA38D00D76926 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D81AED219AA38D00D76926 /* School.swift */; };
+		07D81AF1219B305400D76926 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D81AF0219B305400D76926 /* Comment.swift */; };
 		07F4F0FC2196B15D008D99C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07F4F0FB2196B15D008D99C5 /* GoogleService-Info.plist */; };
 		07F4F0FE2198C547008D99C5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F4F0FD2198C547008D99C5 /* PostViewController.swift */; };
 		46BB7F2B38E96A1A4B9861C2 /* Pods_ClassR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE3C561E764C0D8D8FB9561 /* Pods_ClassR.framework */; };
@@ -57,6 +58,7 @@
 		07D81AE82199ECD100D76926 /* SchoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolViewController.swift; path = ClassR/School/SchoolViewController.swift; sourceTree = SOURCE_ROOT; };
 		07D81AEC219AA38D00D76926 /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolTableViewCell.swift; path = ClassR/School/SchoolTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		07D81AED219AA38D00D76926 /* School.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = School.swift; path = ClassR/School/School.swift; sourceTree = SOURCE_ROOT; };
+		07D81AF0219B305400D76926 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		07F4F0FB2196B15D008D99C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07F4F0FD2198C547008D99C5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		66E3058491531B0BF288061C /* Pods-ClassR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClassR.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClassR/Pods-ClassR.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		07D81ADF2199EB2900D76926 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				07D81AF0219B305400D76926 /* Comment.swift */,
 				07B7B15B21967ED40049817E /* CommentHeaderTableViewCell.swift */,
 				07B7B157219632E40049817E /* CommentTableView.swift */,
 				07B7B1592196335E0049817E /* CommentTableViewCell.swift */,
@@ -318,6 +321,7 @@
 				07B7B1562196315C0049817E /* CommentViewController.swift in Sources */,
 				07B7B158219632E40049817E /* CommentTableView.swift in Sources */,
 				07F4F0FE2198C547008D99C5 /* PostViewController.swift in Sources */,
+				07D81AF1219B305400D76926 /* Comment.swift in Sources */,
 				07B7B1312195F6EC0049817E /* AppDelegate.swift in Sources */,
 				07B7B154219608AA0049817E /* Status.swift in Sources */,
 				07B7B14A2195F74F0049817E /* NewsTableViewCell.swift in Sources */,
@@ -478,6 +482,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3W4L6CCT7U;
 				INFOPLIST_FILE = ClassR/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -497,6 +502,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3W4L6CCT7U;
 				INFOPLIST_FILE = ClassR/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

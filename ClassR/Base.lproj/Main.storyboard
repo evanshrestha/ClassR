@@ -130,16 +130,18 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="ClassR" id="52W-mA-vsV">
                         <barButtonItem key="backBarButtonItem" title=" " id="PZu-gg-iyc"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="lL9-Y9-BcX">
-                            <connections>
-                                <action selector="onRefreshButtonClick:" destination="lA8-3b-EiK" id="Y9w-z2-7h6"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="IPt-fj-obR">
-                            <connections>
-                                <segue destination="8yq-rI-j0t" kind="presentation" identifier="showAddPost" id="Xl0-1b-t8d"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="compose" id="IPt-fj-obR">
+                                <connections>
+                                    <segue destination="8yq-rI-j0t" kind="presentation" identifier="showAddPost" id="Xl0-1b-t8d"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="lL9-Y9-BcX">
+                                <connections>
+                                    <action selector="onRefreshButtonClick:" destination="lA8-3b-EiK" id="Y9w-z2-7h6"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="newsTableView" destination="9h2-nA-oAC" id="9BY-NW-gC3"/>
@@ -165,12 +167,18 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8yq-rI-j0t" id="beG-lp-D7s"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="307" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PTY-RB-QLg">
                                         <rect key="frame" x="30" y="81" width="295" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8yq-rI-j0t" id="Nlx-3X-252"/>
+                                        </connections>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gd1-2J-naQ">
                                         <rect key="frame" x="30" y="135" width="295" height="104"/>
@@ -182,6 +190,9 @@
                                                 <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="8yq-rI-j0t" id="IjF-NR-fEh"/>
+                                        </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inN-gD-QFS">
                                         <rect key="frame" x="261" y="255" width="64" height="36"/>
@@ -288,14 +299,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqQ-Ac-8ms">
                                 <rect key="frame" x="16" y="16" width="343" height="571"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The University of Texas at Austin" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Gg-rq-Gp8">
-                                        <rect key="frame" x="30" y="24" width="283" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qbY-gS-PcM">
-                                        <rect key="frame" x="30" y="78" width="283" height="469"/>
+                                        <rect key="frame" x="30" y="24" width="283" height="523"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="schoolCell" rowHeight="64" id="Ycw-ff-aFl" customClass="SchoolTableViewCell" customModule="ClassR" customModuleProvider="target">
@@ -311,8 +316,8 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="UT Austin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CX9-mn-j4R">
-                                                            <rect key="frame" x="193.5" y="31.5" width="73.5" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="UT Austin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CX9-mn-j4R">
+                                                            <rect key="frame" x="193.5" y="31.5" width="73.5" height="24.5"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -343,11 +348,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qbY-gS-PcM" secondAttribute="trailing" constant="30" id="5Y8-UO-MJu"/>
-                                    <constraint firstItem="1Gg-rq-Gp8" firstAttribute="leading" secondItem="rqQ-Ac-8ms" secondAttribute="leading" constant="30" id="8LB-jr-5NB"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Gg-rq-Gp8" secondAttribute="trailing" constant="30" id="KAU-aE-uwp"/>
                                     <constraint firstAttribute="bottom" secondItem="qbY-gS-PcM" secondAttribute="bottom" constant="24" id="Oza-z4-oeb"/>
-                                    <constraint firstItem="1Gg-rq-Gp8" firstAttribute="top" secondItem="rqQ-Ac-8ms" secondAttribute="top" constant="24" id="dxq-jj-nfl"/>
-                                    <constraint firstItem="qbY-gS-PcM" firstAttribute="top" secondItem="1Gg-rq-Gp8" secondAttribute="bottom" constant="24" id="gmq-23-udA"/>
+                                    <constraint firstItem="qbY-gS-PcM" firstAttribute="top" secondItem="rqQ-Ac-8ms" secondAttribute="top" constant="24" id="eNM-vu-MLn"/>
                                     <constraint firstItem="qbY-gS-PcM" firstAttribute="leading" secondItem="rqQ-Ac-8ms" secondAttribute="leading" constant="30" id="w6U-ca-7ST"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -366,13 +368,23 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8ZI-Fl-fa4"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Find your school" id="NMa-M2-6yW"/>
+                    <navigationItem key="navigationItem" title="Find your school" id="NMa-M2-6yW">
+                        <barButtonItem key="backBarButtonItem" title=" " id="8av-o3-egC"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="schoolTableView" destination="qbY-gS-PcM" id="Y0q-Cg-KLw"/>
-                        <outlet property="schoolTextField" destination="1Gg-rq-Gp8" id="B8x-cp-OU7"/>
+                        <outlet property="searchDisplayController" destination="5HX-ST-MSQ" id="eR9-fW-kXS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jh7-me-sgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="5HX-ST-MSQ">
+                    <connections>
+                        <outlet property="delegate" destination="Y3b-HL-A5I" id="d67-rS-9Qj"/>
+                        <outlet property="searchContentsController" destination="Y3b-HL-A5I" id="LsA-7S-Z6F"/>
+                        <outlet property="searchResultsDataSource" destination="Y3b-HL-A5I" id="Vsh-Ev-x79"/>
+                        <outlet property="searchResultsDelegate" destination="Y3b-HL-A5I" id="IWJ-ie-hsL"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-1638" y="1305"/>
         </scene>

@@ -13,6 +13,8 @@ class Status {
     var courseReferenceID : String = ""
     var statusText : String = ""
     var datePosted : Date = Date()
+    var databaseID : String = ""
+    
     static var statuses : [Int: [String: Status]] = [:]
     static var doneLoading : Bool = false
     
@@ -30,9 +32,8 @@ class Status {
             if let currentStatusInfo = snapshot.value as? NSDictionary {
                 let currentStatusText = currentStatusInfo["statusText"]
                 let currentCourseReferenceID = currentStatusInfo["courseReferenceID"]
-                print(currentCourseReferenceID)
-                print(currentStatusText)
                 let currentStatus = Status(courseReferenceID: currentCourseReferenceID as? String ?? "", statusText: currentStatusText as? String ?? "")
+                currentStatus.databaseID = snapshot.key
                 Status.statuses[index] = [snapshot.key : currentStatus]
                 index = index + 1
                 onLoadedStatus()

@@ -16,7 +16,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var commentTableView: CommentTableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return Comment.comments.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,6 +46,10 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         commentTableView.dataSource = self
         commentTableView.rowHeight = UITableView.automaticDimension
         commentTableView.estimatedRowHeight = 130
+        
+        Comment.loadComments(selectedStatus: status!, onLoadedComment: {
+            self.commentTableView.reloadData()
+        })
         // Do any additional setup after loading the view.
     }
     

@@ -20,7 +20,7 @@ class NewsViewController: UITableViewController {
     
     static var selectedStatus : Status?
     
-    var selectedStatusNSDictionary : NSDictionary = NSDictionary()
+    private let pulldownRefreshControl = UIRefreshControl()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Status.statuses.count
@@ -74,15 +74,20 @@ class NewsViewController: UITableViewController {
 //        ref.child("courseID").setValue(testCourse!.courseID)
 //        ref.child("coursePeriod").setValue(testCourse!.coursePeriod)
         
-       
-        
+        pulldownRefreshControl.tintColor = UIColor.white
+        if #available(iOS 10.0, *) {
+            newsTableView.refreshControl = pulldownRefreshControl
+        } else {
+            newsTableView.addSubview(pulldownRefreshControl)
+        }
+        newsTableView.refreshControl!.addTarget(self, action: #selector(reloadStatuses), for: .valueChanged)
         reloadStatuses()
         
         
         // Do any additional setup after loading the view.
     }
     
-    func reloadStatuses() {
+    @objc func reloadStatuses() {
     
         Course.loadCourses(schoolDatabaseID: School.selectedSchoolDatabaseID, onLoadedCourse: {
             self.newsTableView.reloadData()
@@ -92,6 +97,9 @@ class NewsViewController: UITableViewController {
             self.newsTableView.reloadData()
         })
         
+        DispatchQueue.main.async {
+            self.pulldownRefreshControl.endRefreshing()
+        }
         
     }
     
@@ -113,7 +121,6 @@ class NewsViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        reloadStatuses()
     }
     
 }

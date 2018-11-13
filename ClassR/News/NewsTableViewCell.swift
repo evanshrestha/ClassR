@@ -37,7 +37,7 @@ class NewsTableViewCell: UITableViewCell {
         }
         self.layer.insertSublayer(pulse, above: newsView.layer)
         
-        print(UIDevice.current.identifierForVendor?.uuidString)
+        print(UIDevice.current.identifierForVendor!.uuidString)
     }
     
     override func awakeFromNib() {

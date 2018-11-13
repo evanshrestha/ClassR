@@ -37,7 +37,7 @@ class Pulsing: CALayer {
         self.numberOfPulses = numberOfPulses
         self.position = position
         
-        self.bounds = CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
+        self.bounds = CGRect(x: -radius, y: -radius, width: radius * 2, height: radius * 2)
         self.cornerRadius = radius
         
         
