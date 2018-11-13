@@ -13,6 +13,9 @@
         <array key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
         </array>
+        <array key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
+        </array>
         <array key="OpenSans-Regular.ttf">
             <string>OpenSans-Regular</string>
         </array>
@@ -136,7 +139,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="IPt-fj-obR">
                             <connections>
-                                <segue destination="8yq-rI-j0t" kind="presentation" id="Xl0-1b-t8d"/>
+                                <segue destination="8yq-rI-j0t" kind="presentation" identifier="showAddPost" id="Xl0-1b-t8d"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -253,7 +256,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="116" y="1449.6251874062971"/>
+            <point key="canvasLocation" x="222" y="1435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ntb-1b-e28">
@@ -279,7 +282,7 @@
         <!--Find your school-->
         <scene sceneID="KHu-f0-h2D">
             <objects>
-                <viewController id="Y3b-HL-A5I" sceneMemberID="viewController">
+                <viewController id="Y3b-HL-A5I" customClass="SchoolViewController" customModule="ClassR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gqk-DK-hx9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -288,36 +291,66 @@
                                 <rect key="frame" x="16" y="16" width="343" height="571"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The University of Texas at Austin" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Gg-rq-Gp8">
-                                        <rect key="frame" x="16" y="24" width="311" height="30"/>
+                                        <rect key="frame" x="30" y="24" width="283" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z41-jn-xJ7">
-                                        <rect key="frame" x="267" y="519" width="60" height="36"/>
-                                        <color key="backgroundColor" red="0.45490196078431372" green="0.78431372549019607" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="DVj-Dm-JbH"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
-                                        <state key="normal" title="Join"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qbY-gS-PcM">
+                                        <rect key="frame" x="30" y="78" width="283" height="469"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="schoolCell" rowHeight="64" id="Ycw-ff-aFl" customClass="SchoolTableViewCell" customModule="ClassR" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="283" height="64"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ycw-ff-aFl" id="qZh-h9-2jT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The University of Texas at Austin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LUI-be-64V">
+                                                            <rect key="frame" x="16" y="4" width="251" height="23.5"/>
+                                                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="UT Austin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CX9-mn-j4R">
+                                                            <rect key="frame" x="193.5" y="31.5" width="73.5" height="24"/>
+                                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="LUI-be-64V" firstAttribute="top" secondItem="qZh-h9-2jT" secondAttribute="top" constant="4" id="8Xw-xT-NK6"/>
+                                                        <constraint firstItem="LUI-be-64V" firstAttribute="leading" secondItem="qZh-h9-2jT" secondAttribute="leading" constant="16" id="LAz-6a-d9A"/>
+                                                        <constraint firstItem="CX9-mn-j4R" firstAttribute="top" secondItem="LUI-be-64V" secondAttribute="bottom" constant="4" id="MzU-GK-Xn9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="CX9-mn-j4R" secondAttribute="trailing" constant="16" id="OJh-fQ-Lp9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="LUI-be-64V" secondAttribute="trailing" constant="16" id="rTI-nv-nfm"/>
+                                                        <constraint firstAttribute="bottom" secondItem="CX9-mn-j4R" secondAttribute="bottom" constant="8" id="ySk-mx-hnl"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="schoolNameLabel" destination="LUI-be-64V" id="ZQ5-An-tuo"/>
+                                                    <outlet property="schoolNicknameLabel" destination="CX9-mn-j4R" id="bi3-jm-2kJ"/>
+                                                    <segue destination="lA8-3b-EiK" kind="show" identifier="showSchoolPosts" trigger="accessoryAction" id="kKU-iv-Xc7"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                         <connections>
-                                            <segue destination="lA8-3b-EiK" kind="show" id="4xz-lB-ASx"/>
+                                            <outlet property="dataSource" destination="Y3b-HL-A5I" id="Xj4-ha-xoz"/>
+                                            <outlet property="delegate" destination="Y3b-HL-A5I" id="hzU-bV-Bo8"/>
                                         </connections>
-                                    </button>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="1Gg-rq-Gp8" firstAttribute="leading" secondItem="rqQ-Ac-8ms" secondAttribute="leading" constant="16" id="1cP-Gz-JA4"/>
-                                    <constraint firstAttribute="trailing" secondItem="Z41-jn-xJ7" secondAttribute="trailing" constant="16" id="2eZ-N4-R5h"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Gg-rq-Gp8" secondAttribute="trailing" constant="16" id="5U3-x3-sJG"/>
+                                    <constraint firstAttribute="trailing" secondItem="qbY-gS-PcM" secondAttribute="trailing" constant="30" id="5Y8-UO-MJu"/>
+                                    <constraint firstItem="1Gg-rq-Gp8" firstAttribute="leading" secondItem="rqQ-Ac-8ms" secondAttribute="leading" constant="30" id="8LB-jr-5NB"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Gg-rq-Gp8" secondAttribute="trailing" constant="30" id="KAU-aE-uwp"/>
+                                    <constraint firstAttribute="bottom" secondItem="qbY-gS-PcM" secondAttribute="bottom" constant="24" id="Oza-z4-oeb"/>
                                     <constraint firstItem="1Gg-rq-Gp8" firstAttribute="top" secondItem="rqQ-Ac-8ms" secondAttribute="top" constant="24" id="dxq-jj-nfl"/>
-                                    <constraint firstAttribute="bottom" secondItem="Z41-jn-xJ7" secondAttribute="bottom" constant="16" id="iQK-fz-QS3"/>
+                                    <constraint firstItem="qbY-gS-PcM" firstAttribute="top" secondItem="1Gg-rq-Gp8" secondAttribute="bottom" constant="24" id="gmq-23-udA"/>
+                                    <constraint firstItem="qbY-gS-PcM" firstAttribute="leading" secondItem="rqQ-Ac-8ms" secondAttribute="leading" constant="30" id="w6U-ca-7ST"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -336,10 +369,14 @@
                         <viewLayoutGuide key="safeArea" id="8ZI-Fl-fa4"/>
                     </view>
                     <navigationItem key="navigationItem" title="Find your school" id="NMa-M2-6yW"/>
+                    <connections>
+                        <outlet property="schoolTableView" destination="qbY-gS-PcM" id="Y0q-Cg-KLw"/>
+                        <outlet property="schoolTextField" destination="1Gg-rq-Gp8" id="B8x-cp-OU7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jh7-me-sgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1674.4000000000001" y="1304.7976011994003"/>
+            <point key="canvasLocation" x="-1638" y="1305"/>
         </scene>
         <!--Comment View Controller-->
         <scene sceneID="hoi-Zd-iis">
@@ -364,13 +401,13 @@
                                                     <rect key="frame" x="10" y="10" width="355" height="115"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Does anyone have the notes for last lecture?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDX-B3-0mv">
-                                                            <rect key="frame" x="16" y="42" width="323" height="57"/>
+                                                            <rect key="frame" x="16" y="46" width="323" height="53"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MUS 307" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugn-c6-hTn">
-                                                            <rect key="frame" x="16" y="8" width="93" height="26"/>
+                                                            <rect key="frame" x="16" y="8" width="93" height="30"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="22"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -412,13 +449,13 @@
                                                     <rect key="frame" x="10" y="5" width="355" height="90"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anonymous" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vag-iS-qze">
-                                                            <rect key="frame" x="16" y="8" width="90.5" height="27"/>
+                                                            <rect key="frame" x="16" y="8" width="95.5" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Yeah" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7m-nn-fya">
-                                                            <rect key="frame" x="16" y="50" width="323" height="20"/>
+                                                            <rect key="frame" x="16" y="46.5" width="323" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>

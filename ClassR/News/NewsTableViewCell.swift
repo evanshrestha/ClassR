@@ -17,8 +17,9 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var newsContentView: UIView!
     
-    var liked : Bool = false
     var status : Status?
+    
+    var liked : Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -50,8 +51,6 @@ class NewsTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func updateLikeButton() {
@@ -74,6 +73,7 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     @IBAction func onCommentsTap(_ sender: Any) {
+        NewsViewController.selectedStatus = self.status
     }
     
 }

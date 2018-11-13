@@ -11,8 +11,6 @@ import Firebase
 
 class NewsViewController: UITableViewController {
     
-    
-    
     @IBOutlet weak var newsTableView: NewsTableView!
     
     var testCourse : Course?
@@ -20,11 +18,12 @@ class NewsViewController: UITableViewController {
     
     var postNumber = 0
     
-    var statuses : Dictionary<Int, NSDictionary> = [:]
-    var courses : NSDictionary = NSDictionary()
+    static var selectedStatus : Status?
+    
+    var selectedStatusNSDictionary : NSDictionary = NSDictionary()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statuses.count
+        return Status.statuses.count
     }
     
     @IBAction func onRefreshButtonClick(_ sender: Any) {
@@ -33,12 +32,20 @@ class NewsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsTableViewCell
-        let statusText : String = (statuses[statuses.count - indexPath.row - 1] as! NSDictionary)["statusText"]! as! String
-        let courseDatabaseID : String = (statuses[statuses.count - indexPath.row - 1] as! NSDictionary)["courseReferenceID"]! as! String
-        let courseName : String = (courses[courseDatabaseID] as! NSDictionary)["courseName"] as! String
-        cell.classNameLabel.text = courseName
+        let statusDatabaseID = Status.statuses[Status.statuses.count - indexPath.row - 1]!.keys.first!
+        let status = Status.statuses[Status.statuses.count - indexPath.row - 1]![statusDatabaseID]!
+        
+        let statusText = status.statusText
+        let courseDatabaseID = status.courseReferenceID
+        if let course = Course.courses[courseDatabaseID] {
+            cell.classNameLabel.text = course.courseName
+        } else {
+            cell.classNameLabel.text = ""
+        }
         cell.newsTextLabel.text = statusText
-//        cell.status = testStatus!
+        
+        cell.status = status
+        
         return cell
     }
     
@@ -63,9 +70,6 @@ class NewsViewController: UITableViewController {
 //        ref.child("courseID").setValue(testCourse!.courseID)
 //        ref.child("coursePeriod").setValue(testCourse!.coursePeriod)
         
-//        ref = Database.database().reference().child("statuses").childByAutoId()
-//        ref.child("courseReferenceID").setValue(testStatus!.course.databaseID)
-//        ref.child("statusText").setValue("hello tatas")
        
         
         reloadStatuses()
@@ -75,51 +79,37 @@ class NewsViewController: UITableViewController {
     }
     
     func reloadStatuses() {
-        self.statuses = [:]
-        self.postNumber = 0
-    Database.database().reference().child("statuses").queryOrdered(byChild: "datePosted").observe(.childAdded, with: { (snapshot) in
-        print(snapshot)
-    if let statusDict = snapshot.value as? NSDictionary {
-        self.statuses[self.postNumber] = snapshot.value! as! NSDictionary
-        self.postNumber = self.postNumber + 1
-    } else {
-    print("No statuses found")
-    }
-    }) {
-    (error) in
-    print(error.localizedDescription)
-    }
+    
+        Course.loadCourses(schoolDatabaseID: School.selectedSchoolDatabaseID, onLoadedCourse: {
+            self.newsTableView.reloadData()
+        })
         
-    Database.database().reference().child("statuses").queryOrdered(byChild: "datePosted").observeSingleEvent(of: .value, with: { (snapshot) in
-        self.newsTableView.reloadData()
-    }) {
-        (error) in
-        print(error.localizedDescription)
-    }
+        Status.loadStatuses(schoolDatabaseID: School.selectedSchoolDatabaseID, onLoadedStatus: {
+            self.newsTableView.reloadData()
+        })
         
-    Database.database().reference().child("courses").observeSingleEvent(of: .value, with: { (snapshot) in
-    if let courseDict = snapshot.value as? NSDictionary{
-        self.courses = snapshot.value as! NSDictionary
-    } else {
-    print("No courses found")
-        self.courses = NSDictionary()
+        
     }
-    }) {
-    (error) in
-    print(error.localizedDescription)
-    }
-    }
+    
+    
 
     /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
     */
-    override func viewDidAppear(_ animated: Bool) {
-        print("TEST")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showAddPost") {
+//            (segue.destination as! PostViewController).schoolDatabaseID = School.selectedSchoolDatabaseID
+        }
+        
+        if (segue.identifier == "statusToCommentsSegue") {
+            (segue.destination as! CommentViewController).status = NewsViewController.selectedStatus
+        }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        reloadStatuses()
+    }
+    
 }

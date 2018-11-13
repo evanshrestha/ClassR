@@ -9,6 +9,10 @@
 import UIKit
 
 class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var status : Status?
+    var course : Course?
+    
     @IBOutlet weak var commentTableView: CommentTableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -18,6 +22,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! CommentHeaderTableViewCell
+            cell.headerTextLabel.text = status?.statusText
             cell.headerView.layer.cornerRadius = CGFloat(10)
             return cell
         } else {

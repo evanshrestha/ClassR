@@ -7,8 +7,12 @@
 //
 
 import Foundation
+import Firebase
 
 class Course {
+    
+    static var courses : Dictionary<String, Course> = [:]
+    
     var courseName : String = "" // Jazz Appreciation
     var courseDepartment : String = "" // MUS
     var courseNumber : String = "" // 307
@@ -24,5 +28,34 @@ class Course {
         self.courseInstructor = courseInstructor
         self.courseID = courseID
         self.coursePeriod = coursePeriod
+    }
+    
+    static func loadCourses(schoolDatabaseID : String, onLoadedCourse : @escaping () -> ()) {
+        Course.courses = [:]
+        let ref = Database.database().reference()
+        ref.child("courses").child(schoolDatabaseID).observe(.childAdded, with: { (snapshot) in
+            if let currentCourseInfo = snapshot.value as? NSDictionary {
+                let currentCourseDepartment = currentCourseInfo["courseDepartment"] as? String ?? ""
+                let currentCourseID = currentCourseInfo["courseID"] as? String ?? ""
+                let currentCourseInstructor = currentCourseInfo["courseInstructor"] as? String ?? ""
+                let currentCourseName = currentCourseInfo["courseName"] as? String ?? ""
+                let currentCourseNumber = currentCourseInfo["courseNumber"] as? String ?? ""
+                let currentCoursePeriod = currentCourseInfo["coursePeriod"] as? String ?? ""
+                let currentCourseDatabaseID = snapshot.key
+                
+                let currentCourse = Course(courseName: currentCourseName, courseDepartment: currentCourseDepartment, courseNumber: currentCourseNumber, courseInstructor: currentCourseInstructor, courseID: currentCourseID, coursePeriod: currentCoursePeriod)
+                
+                currentCourse.databaseID = currentCourseDatabaseID
+                
+                courses[currentCourseDatabaseID] = currentCourse
+                
+                onLoadedCourse()
+            } else {
+                print("No courses found")
+            }
+        }) {
+            (error) in
+            print(error.localizedDescription)
+        }
     }
 }
