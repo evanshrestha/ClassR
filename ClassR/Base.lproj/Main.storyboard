@@ -41,7 +41,7 @@
                                             <rect key="frame" x="10" y="16" width="355" height="184"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Does anyone have notes for last lecture?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7T-Qg-FTx">
-                                                    <rect key="frame" x="16" y="41" width="323" height="97"/>
+                                                    <rect key="frame" x="16" y="62" width="323" height="58"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -85,17 +85,14 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="k7T-Qg-FTx" firstAttribute="top" secondItem="yOr-ff-VGw" secondAttribute="bottom" constant="3" id="2St-08-Ycj"/>
+                                                <constraint firstAttribute="trailing" secondItem="k7T-Qg-FTx" secondAttribute="trailing" constant="16" id="CgL-dv-Ihz"/>
                                                 <constraint firstItem="yOr-ff-VGw" firstAttribute="top" secondItem="IOm-od-JeV" secondAttribute="top" constant="8" id="Cyd-C2-cgS"/>
+                                                <constraint firstItem="k7T-Qg-FTx" firstAttribute="leading" secondItem="IOm-od-JeV" secondAttribute="leading" constant="16" id="DEU-w9-FrK"/>
                                                 <constraint firstAttribute="bottom" secondItem="KnZ-nF-IDE" secondAttribute="bottom" id="EtD-WZ-cbK"/>
-                                                <constraint firstItem="k7T-Qg-FTx" firstAttribute="leading" secondItem="IOm-od-JeV" secondAttribute="leading" constant="16" id="JhS-pb-7Z0"/>
-                                                <constraint firstItem="KnZ-nF-IDE" firstAttribute="top" secondItem="k7T-Qg-FTx" secondAttribute="bottom" constant="6" id="L3j-z2-aKU"/>
+                                                <constraint firstItem="KnZ-nF-IDE" firstAttribute="top" secondItem="k7T-Qg-FTx" secondAttribute="bottom" constant="24" id="FJH-pp-8Qj"/>
                                                 <constraint firstItem="yOr-ff-VGw" firstAttribute="leading" secondItem="IOm-od-JeV" secondAttribute="leading" constant="16" id="L6u-gA-Da0"/>
-                                                <constraint firstItem="k7T-Qg-FTx" firstAttribute="top" secondItem="yOr-ff-VGw" secondAttribute="bottom" constant="3" id="Qa1-Np-yj9"/>
-                                                <constraint firstAttribute="trailing" secondItem="k7T-Qg-FTx" secondAttribute="trailing" constant="16" id="RHK-a6-OBe"/>
-                                                <constraint firstItem="k7T-Qg-FTx" firstAttribute="leading" secondItem="IOm-od-JeV" secondAttribute="leading" constant="16" id="bfG-te-BQM"/>
+                                                <constraint firstItem="k7T-Qg-FTx" firstAttribute="top" secondItem="yOr-ff-VGw" secondAttribute="bottom" constant="24" id="ePk-PL-bfd"/>
                                                 <constraint firstAttribute="trailing" secondItem="emS-nh-pid" secondAttribute="trailing" id="ncL-oc-1J0"/>
-                                                <constraint firstAttribute="trailing" secondItem="k7T-Qg-FTx" secondAttribute="trailing" constant="16" id="sGZ-zw-v4J"/>
                                                 <constraint firstAttribute="bottom" secondItem="emS-nh-pid" secondAttribute="bottom" id="t86-fT-2G1"/>
                                                 <constraint firstItem="KnZ-nF-IDE" firstAttribute="leading" secondItem="IOm-od-JeV" secondAttribute="leading" id="uZ7-yF-KJu"/>
                                                 <constraint firstAttribute="trailing" secondItem="yOr-ff-VGw" secondAttribute="trailing" constant="16" id="uoO-of-ZcF"/>
@@ -132,6 +129,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ClassR" id="52W-mA-vsV">
+                        <barButtonItem key="backBarButtonItem" title=" " id="PZu-gg-iyc"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="lL9-Y9-BcX">
                             <connections>
                                 <action selector="onRefreshButtonClick:" destination="lA8-3b-EiK" id="Y9w-z2-7h6"/>
@@ -378,7 +376,7 @@
             </objects>
             <point key="canvasLocation" x="-1638" y="1305"/>
         </scene>
-        <!--Comment View Controller-->
+        <!--ClassR-->
         <scene sceneID="hoi-Zd-iis">
             <objects>
                 <viewController id="MuL-ny-BTz" customClass="CommentViewController" customModule="ClassR" customModuleProvider="target" sceneMemberID="viewController">
@@ -504,6 +502,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UNC-1n-5YS"/>
                     </view>
+                    <navigationItem key="navigationItem" title="ClassR" id="bGL-9X-VOc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="3k9-ry-Z84"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="commentTableView" destination="D38-cF-Vzz" id="lIV-YP-J3D"/>
                     </connections>
@@ -511,6 +512,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zp2-4J-obI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="317.60000000000002" y="617.54122938530736"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2CP-Dq-AsZ">
+            <objects>
+                <viewController id="HvF-Sq-XcR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yiJ-aG-afe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="MAP-3s-YWP"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nxA-wF-KoB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1283" y="625"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

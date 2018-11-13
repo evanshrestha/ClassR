@@ -42,6 +42,8 @@ class NewsViewController: UITableViewController {
         } else {
             cell.classNameLabel.text = ""
         }
+        
+        
         cell.newsTextLabel.text = statusText
         
         cell.status = status
@@ -49,13 +51,15 @@ class NewsViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(200);
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return CGFloat(200);
+//    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        newsTableView.rowHeight = UITableView.automaticDimension
+        newsTableView.estimatedRowHeight = 200
         
 //        testCourse = Course(courseName: "Jazz Appreciation", courseDepartment: "MUS", courseNumber: "307", courseInstructor: "Jeff Hellmer", courseID: "2312", coursePeriod: "Fall 2018")
 //        testCourse!.databaseID = "-LQwSgE9YtZBFIl3tcHu"

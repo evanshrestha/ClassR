@@ -32,19 +32,20 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 0) {
-            return CGFloat(130)
-        }
-        return CGFloat(100)
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if (indexPath.row == 0) {
+//            return CGFloat(130)
+//        }
+//        return CGFloat(100)
+//    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         commentTableView.delegate = self
         commentTableView.dataSource = self
-
+        commentTableView.rowHeight = UITableView.automaticDimension
+        commentTableView.estimatedRowHeight = 130
         // Do any additional setup after loading the view.
     }
     
