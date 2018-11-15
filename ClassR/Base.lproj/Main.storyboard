@@ -41,7 +41,7 @@
                                             <rect key="frame" x="10" y="16" width="355" height="184"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Does anyone have notes for last lecture?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7T-Qg-FTx">
-                                                    <rect key="frame" x="16" y="62" width="323" height="58"/>
+                                                    <rect key="frame" x="16" y="58" width="323" height="62"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MUS 307" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOr-ff-VGw">
-                                                    <rect key="frame" x="16" y="8" width="323" height="30"/>
+                                                    <rect key="frame" x="16" y="8" width="323" height="26"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="22"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -181,7 +181,7 @@
                                         </connections>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gd1-2J-naQ">
-                                        <rect key="frame" x="30" y="135" width="295" height="104"/>
+                                        <rect key="frame" x="30" y="135" width="295" height="108"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -195,7 +195,7 @@
                                         </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inN-gD-QFS">
-                                        <rect key="frame" x="261" y="255" width="64" height="36"/>
+                                        <rect key="frame" x="261" y="259" width="64" height="32"/>
                                         <color key="backgroundColor" red="0.5" green="0.85833333329999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="aqz-xT-972"/>
@@ -515,7 +515,12 @@
                         <viewLayoutGuide key="safeArea" id="UNC-1n-5YS"/>
                     </view>
                     <navigationItem key="navigationItem" title="ClassR" id="bGL-9X-VOc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="3k9-ry-Z84"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="lab-ak-kwO"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="3k9-ry-Z84">
+                            <connections>
+                                <segue destination="HvF-Sq-XcR" kind="show" identifier="createCommentSegue" id="ybm-TA-xE4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="commentTableView" destination="D38-cF-Vzz" id="lIV-YP-J3D"/>
@@ -525,20 +530,79 @@
             </objects>
             <point key="canvasLocation" x="317.60000000000002" y="617.54122938530736"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Comment View Controller-->
         <scene sceneID="2CP-Dq-AsZ">
             <objects>
-                <viewController id="HvF-Sq-XcR" sceneMemberID="viewController">
+                <viewController id="HvF-Sq-XcR" customClass="CreateCommentViewController" customModule="ClassR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yiJ-aG-afe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(Optional) Nickname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VUL-xU-ZyH">
+                                <rect key="frame" x="16" y="30" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgv-nl-VYm">
+                                <rect key="frame" x="16" y="97" width="343" height="150"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="UmE-rY-1Ls"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reply:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIn-zx-Pbj">
+                                <rect key="frame" x="16" y="68" width="48" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBt-xZ-T8S">
+                                <rect key="frame" x="295" y="255" width="64" height="36"/>
+                                <color key="backgroundColor" red="0.5" green="0.85833333329999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="JyI-sk-gJR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
+                                <state key="normal" title="Post">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onCommentPostButtonClick:" destination="HvF-Sq-XcR" eventType="touchUpInside" id="0dN-sX-wDc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OIn-zx-Pbj" firstAttribute="leading" secondItem="MAP-3s-YWP" secondAttribute="leading" constant="16" id="8pU-cX-J8T"/>
+                            <constraint firstItem="Mgv-nl-VYm" firstAttribute="top" secondItem="OIn-zx-Pbj" secondAttribute="bottom" constant="8" id="CQn-qF-P59"/>
+                            <constraint firstItem="MAP-3s-YWP" firstAttribute="trailing" secondItem="qBt-xZ-T8S" secondAttribute="trailing" constant="16" id="CzB-bY-Yck"/>
+                            <constraint firstItem="MAP-3s-YWP" firstAttribute="trailing" secondItem="VUL-xU-ZyH" secondAttribute="trailing" constant="16" id="FVY-qh-R2L"/>
+                            <constraint firstItem="Mgv-nl-VYm" firstAttribute="leading" secondItem="MAP-3s-YWP" secondAttribute="leading" constant="16" id="HU1-YR-snO"/>
+                            <constraint firstItem="MAP-3s-YWP" firstAttribute="trailing" secondItem="Mgv-nl-VYm" secondAttribute="trailing" constant="16" id="P2t-HW-0XR"/>
+                            <constraint firstItem="qBt-xZ-T8S" firstAttribute="top" secondItem="Mgv-nl-VYm" secondAttribute="bottom" constant="8" id="P9l-hL-7XT"/>
+                            <constraint firstItem="OIn-zx-Pbj" firstAttribute="top" secondItem="VUL-xU-ZyH" secondAttribute="bottom" constant="8" id="jJH-iQ-1pQ"/>
+                            <constraint firstItem="VUL-xU-ZyH" firstAttribute="leading" secondItem="MAP-3s-YWP" secondAttribute="leading" constant="16" id="mpr-3g-lgY"/>
+                            <constraint firstItem="VUL-xU-ZyH" firstAttribute="top" secondItem="MAP-3s-YWP" secondAttribute="top" constant="30" id="q1F-dJ-vBP"/>
+                            <constraint firstItem="MAP-3s-YWP" firstAttribute="trailing" secondItem="qBt-xZ-T8S" secondAttribute="trailing" constant="16" id="s3Q-MA-tlH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="MAP-3s-YWP"/>
                     </view>
+                    <connections>
+                        <outlet property="nicknameLabel" destination="VUL-xU-ZyH" id="wU2-fb-UVR"/>
+                        <outlet property="replyTextView" destination="Mgv-nl-VYm" id="O2a-Vm-SBo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxA-wF-KoB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1283" y="625"/>
+            <point key="canvasLocation" x="1282.4000000000001" y="624.73763118440786"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

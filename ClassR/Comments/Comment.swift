@@ -23,26 +23,28 @@ class Comment {
     static let dateFormatter : DateFormatter = DateFormatter()
     
     static func loadComments(selectedStatus: Status, onLoadedComment : @escaping () -> ()) {
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         Comment.comments = [:]
         var i = 0
         let ref = Database.database().reference()
         ref.child("comments").child(School.selectedSchoolDatabaseID).child(selectedStatus.databaseID).observe(.childAdded, with: { (snapshot) in
             if let currentCommentInfo = snapshot.value as? NSDictionary {
-                let currentCommentText = currentCommentInfo["text"] as? String ?? ""
-                let currentCommentCreatorUUID = currentCommentInfo["uuid"] as? String ?? ""
-                let currentCommentCreatorNickname = currentCommentInfo["nickname"] as? String ?? ""
-                let currentCommentDateCreated = currentCommentInfo["dateCreated"] as? String ?? ""
+                if let currentCommentText = currentCommentInfo["text"] as? String,
+                    let currentCommentCreatorUUID = currentCommentInfo["uuid"] as? String,
+                    let currentCommentCreatorNickname = currentCommentInfo["nickname"] as? String,
+                    let currentCommentDateCreated = currentCommentInfo["dateCreated"] as? String {
                 
-                let currentComment = Comment()
-                currentComment.status = selectedStatus
-                currentComment.creatorUUID = currentCommentCreatorUUID
-                currentComment.creatorNickname = currentCommentCreatorNickname
-                currentComment.text = currentCommentText
-                currentComment.dateCreated = dateFormatter.date(from: currentCommentDateCreated)!
-                currentComment.databaseID = snapshot.key
-                
-                Comment.comments[i] = currentComment
-                i = i + 1
+                    let currentComment = Comment()
+                    currentComment.status = selectedStatus
+                    currentComment.creatorUUID = currentCommentCreatorUUID
+                    currentComment.creatorNickname = currentCommentCreatorNickname
+                    currentComment.text = currentCommentText
+                    currentComment.dateCreated = dateFormatter.date(from: currentCommentDateCreated)!
+                    currentComment.databaseID = snapshot.key
+                    
+                    Comment.comments[i] = currentComment
+                    i = i + 1
+                }
                 
                 onLoadedComment()
             } else {

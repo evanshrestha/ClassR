@@ -14,6 +14,8 @@ class PostViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var insideView: UIView!
     @IBOutlet var outsideTapGestureRecognizer: UITapGestureRecognizer!
     
+    var newsViewController : NewsViewController?
+    
     @IBOutlet weak var courseDepartmentTextField: UITextField!
     @IBOutlet weak var courseNumberTextField: UITextField!
     @IBOutlet weak var postTextField: UITextView!
@@ -25,17 +27,37 @@ class PostViewController: UIViewController, UITextViewDelegate{
             var courses : NSDictionary
             courses = snapshot.value as! NSDictionary
             
+            let newPostReference = ref.child("statuses").child(School.selectedSchoolDatabaseID).childByAutoId()
+            
             for course in courses {
                 let courseDatabaseReference = course.key
                 let courseInformation = courses[courseDatabaseReference] as! NSDictionary
                 if ((courseInformation["courseDepartment"] as! String) == self.courseDepartmentTextField.text!) && ((courseInformation["courseNumber"] as! String) == self.courseNumberTextField.text!) {
-                    let newPostReference = ref.child("statuses").child(School.selectedSchoolDatabaseID).childByAutoId()
                     newPostReference.child("statusText").setValue(self.postTextField.text!)
                     newPostReference.child("courseReferenceID").setValue(courseDatabaseReference)
                     newPostReference.child("datePosted").setValue(Date().description)
                 }
             }
             
+            DispatchQueue.main.async {
+                var postCreated = false
+                var numChecks = 0
+                while (!postCreated && numChecks < 5) {
+                    
+                    usleep(200000)
+                    self.newsViewController?.reloadStatuses()
+                    for dict in Status.statuses.values {
+                        for status in dict.values {
+                            if status.databaseID == newPostReference.key {
+                                postCreated = true
+                                self.closePostViewController()
+                                break
+                            }
+                        }
+                    }
+                    numChecks = numChecks + 1
+                }
+            }
             self.closePostViewController()
         }) {
             (error) in
@@ -53,6 +75,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
     
     func closePostViewController () {
         dismiss(animated: true, completion: {
+            self.newsViewController?.reloadStatuses()
         })
     }
     override func viewDidLoad() {

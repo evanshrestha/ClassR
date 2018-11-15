@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC2FE2199024D00DAC1A1 /* Pulsing.swift */; };
+		077F9758219D3AEB00CAD195 /* CreateCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */; };
 		07B7B1312195F6EC0049817E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B1302195F6EC0049817E /* AppDelegate.swift */; };
 		07B7B1362195F6EC0049817E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07B7B1342195F6EC0049817E /* Main.storyboard */; };
 		07B7B1392195F6EC0049817E /* ClassR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B1372195F6EC0049817E /* ClassR.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		077BC2FE2199024D00DAC1A1 /* Pulsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsing.swift; sourceTree = "<group>"; };
+		077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentViewController.swift; sourceTree = "<group>"; };
 		07B7B12D2195F6EC0049817E /* ClassR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B7B1302195F6EC0049817E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07B7B1352195F6EC0049817E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		07D81ADF2199EB2900D76926 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */,
 				07D81AF0219B305400D76926 /* Comment.swift */,
 				07B7B15B21967ED40049817E /* CommentHeaderTableViewCell.swift */,
 				07B7B157219632E40049817E /* CommentTableView.swift */,
@@ -326,6 +329,7 @@
 				07B7B154219608AA0049817E /* Status.swift in Sources */,
 				07B7B14A2195F74F0049817E /* NewsTableViewCell.swift in Sources */,
 				07B7B1482195F74F0049817E /* NewsTableView.swift in Sources */,
+				077F9758219D3AEB00CAD195 /* CreateCommentViewController.swift in Sources */,
 				07B7B15A2196335E0049817E /* CommentTableViewCell.swift in Sources */,
 				07D81AEE219AA38D00D76926 /* SchoolTableViewCell.swift in Sources */,
 				07D81AE92199ECD100D76926 /* SchoolViewController.swift in Sources */,

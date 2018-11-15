@@ -23,11 +23,15 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! CommentHeaderTableViewCell
             cell.headerTextLabel.text = status?.statusText
+            cell.classNameLabel.text = course?.courseName
             cell.headerView.layer.cornerRadius = CGFloat(10)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell") as! CommentTableViewCell
+            let currentComment = Comment.comments[indexPath.row - 1]
             cell.commentView.layer.cornerRadius = CGFloat(10)
+            cell.commentNameLabel.text = currentComment?.creatorNickname
+            cell.commentTextLabel.text = currentComment?.text
             return cell
         }
     }
@@ -47,10 +51,23 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         commentTableView.rowHeight = UITableView.automaticDimension
         commentTableView.estimatedRowHeight = 130
         
+        reloadComments()
+    }
+    
+    func reloadComments() {
         Comment.loadComments(selectedStatus: status!, onLoadedComment: {
             self.commentTableView.reloadData()
         })
-        // Do any additional setup after loading the view.
+        self.commentTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "createCommentSegue") {
+            if let destination = segue.destination as? CreateCommentViewController {
+                destination.selectedStatus = self.status
+                destination.commentViewController = self
+            }
+        }
     }
     
 
@@ -59,8 +76,8 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+         Get the new view controller using segue.destination.
+         Pass the selected object to the new view controller.
     }
     */
 

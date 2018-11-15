@@ -13,9 +13,6 @@ class NewsViewController: UITableViewController {
     
     @IBOutlet weak var newsTableView: NewsTableView!
     
-    var testCourse : Course?
-    var testStatus : Status?
-    
     var postNumber = 0
     
     static var selectedStatus : Status?
@@ -105,18 +102,21 @@ class NewsViewController: UITableViewController {
     
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    */
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showAddPost") {
-//            (segue.destination as! PostViewController).schoolDatabaseID = School.selectedSchoolDatabaseID
+            if let destination = segue.destination as? PostViewController {
+                destination.newsViewController = self
+            }
         }
         
         if (segue.identifier == "statusToCommentsSegue") {
-            (segue.destination as! CommentViewController).status = NewsViewController.selectedStatus
+            if let destination = segue.destination as? CommentViewController {
+                let status = NewsViewController.selectedStatus
+                destination.status = status
+                destination.course = Course.courses[(status?.courseReferenceID)!]
+            }
+            
         }
     }
     

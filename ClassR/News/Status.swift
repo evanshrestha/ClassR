@@ -30,12 +30,15 @@ class Status {
         let ref = Database.database().reference()
         ref.child("statuses").child(schoolDatabaseID).queryOrdered(byChild: "datePosted").observe(.childAdded, with: { (snapshot) in
             if let currentStatusInfo = snapshot.value as? NSDictionary {
-                let currentStatusText = currentStatusInfo["statusText"]
-                let currentCourseReferenceID = currentStatusInfo["courseReferenceID"]
-                let currentStatus = Status(courseReferenceID: currentCourseReferenceID as? String ?? "", statusText: currentStatusText as? String ?? "")
-                currentStatus.databaseID = snapshot.key
-                Status.statuses[index] = [snapshot.key : currentStatus]
-                index = index + 1
+                if let currentStatusText = currentStatusInfo["statusText"] as? String,
+                    let currentCourseReferenceID = currentStatusInfo["courseReferenceID"] as? String {
+                        let currentStatus = Status(courseReferenceID: currentCourseReferenceID, statusText: currentStatusText)
+                        currentStatus.databaseID = snapshot.key
+                        Status.statuses[index] = [snapshot.key : currentStatus]
+                        index = index + 1
+                
+                
+                }
                 onLoadedStatus()
             } else {
                 print("No statuses found")
