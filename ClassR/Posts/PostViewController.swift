@@ -15,29 +15,19 @@ class PostViewController: UIViewController, UITextViewDelegate{
     @IBOutlet var outsideTapGestureRecognizer: UITapGestureRecognizer!
     
     var newsViewController : NewsViewController?
+    var selectedCourse : Course?
+    @IBOutlet weak var selectCourseButton: UIButton!
     
-    @IBOutlet weak var courseDepartmentTextField: UITextField!
-    @IBOutlet weak var courseNumberTextField: UITextField!
+    
     @IBOutlet weak var postTextField: UITextView!
     @IBAction func onPostButtonClick(_ sender: Any) {
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        Database.database().reference().child("courses").child(School.selectedSchoolDatabaseID).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            var courses : NSDictionary
-            courses = snapshot.value as! NSDictionary
-            
+        
             let newPostReference = ref.child("statuses").child(School.selectedSchoolDatabaseID).childByAutoId()
-            
-            for course in courses {
-                let courseDatabaseReference = course.key
-                let courseInformation = courses[courseDatabaseReference] as! NSDictionary
-                if ((courseInformation["courseDepartment"] as! String) == self.courseDepartmentTextField.text!) && ((courseInformation["courseNumber"] as! String) == self.courseNumberTextField.text!) {
-                    newPostReference.child("statusText").setValue(self.postTextField.text!)
-                    newPostReference.child("courseReferenceID").setValue(courseDatabaseReference)
-                    newPostReference.child("datePosted").setValue(Date().description)
-                }
-            }
+            newPostReference.child("statusText").setValue(self.postTextField.text!)
+            newPostReference.child("courseReferenceID").setValue(self.selectedCourse?.databaseID)
+            newPostReference.child("datePosted").setValue(Date().description)
             
             DispatchQueue.main.async {
                 var postCreated = false
@@ -57,14 +47,17 @@ class PostViewController: UIViewController, UITextViewDelegate{
                     }
                     numChecks = numChecks + 1
                 }
+                if (!postCreated) {
+                    self.closePostViewController()
+                }
             }
-            self.closePostViewController()
-        }) {
-            (error) in
-            print(error.localizedDescription)
-        }
-        
     }
+    
+    func selectCourse(selectedCourse: Course) {
+        self.selectedCourse = selectedCourse
+        self.selectCourseButton.setTitle(selectedCourse.courseName, for: .normal)
+    }
+    
     @IBAction func onOutsideTap(_ sender: UITapGestureRecognizer) {
         if (!insideView.layer.bounds.contains(sender.location(in: insideView))) {
             closePostViewController()
@@ -74,27 +67,28 @@ class PostViewController: UIViewController, UITextViewDelegate{
     @IBOutlet var outsideView: UIView!
     
     func closePostViewController () {
-        dismiss(animated: true, completion: {
-            self.newsViewController?.reloadStatuses()
-        })
+        self.newsViewController?.reloadStatuses()
+        self.navigationController?.popViewController(animated: true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //outsideView.addGestureRecognizer(outsideTapGestureRecognizer)
-        // Do any additional setup after loading the view.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        self.postTextField.layer.borderColor = UIColor.lightGray.cgColor
+        self.postTextField.layer.cornerRadius = 10
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        postTextField.resignFirstResponder()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
- */
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "postToCourseSelectionSegue") {
+            if let destination = segue.destination as? CourseSearchViewController {
+                destination.postViewController = self
+            }
+        }
+    }
  
 
 }

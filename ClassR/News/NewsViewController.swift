@@ -47,29 +47,11 @@ class NewsViewController: UITableViewController {
         
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return CGFloat(200);
-//    }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         newsTableView.rowHeight = UITableView.automaticDimension
         newsTableView.estimatedRowHeight = 200
-        
-//        testCourse = Course(courseName: "Jazz Appreciation", courseDepartment: "MUS", courseNumber: "307", courseInstructor: "Jeff Hellmer", courseID: "2312", coursePeriod: "Fall 2018")
-//        testCourse!.databaseID = "-LQwSgE9YtZBFIl3tcHu"
-//        testStatus = Status(course: testCourse!, statusText: "ASDF")
-        
-//        var ref: DatabaseReference!
-//        ref = Database.database().reference().child("courses").childByAutoId()
-//        ref.child("courseName").setValue(testCourse!.courseName)
-//        ref.child("courseDepartment").setValue(testCourse!.courseDepartment)
-//        ref.child("courseNumber").setValue(testCourse!.courseNumber)
-//        ref.child("courseInstructor").setValue(testCourse!.courseInstructor)
-//        ref.child("courseID").setValue(testCourse!.courseID)
-//        ref.child("coursePeriod").setValue(testCourse!.coursePeriod)
         
         pulldownRefreshControl.tintColor = UIColor.white
         if #available(iOS 10.0, *) {
@@ -79,14 +61,11 @@ class NewsViewController: UITableViewController {
         }
         newsTableView.refreshControl!.addTarget(self, action: #selector(reloadStatuses), for: .valueChanged)
         reloadStatuses()
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     @objc func reloadStatuses() {
     
-        Course.loadCourses(schoolDatabaseID: School.selectedSchoolDatabaseID, onLoadedCourse: {
+        Course.loadCourses(schoolDatabaseID: School.selectedSchoolDatabaseID, completion: {
             self.newsTableView.reloadData()
         })
         

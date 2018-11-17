@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC2FE2199024D00DAC1A1 /* Pulsing.swift */; };
 		077F9758219D3AEB00CAD195 /* CreateCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */; };
+		077F975F219F461200CAD195 /* CourseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F975E219F461200CAD195 /* CourseSearchViewController.swift */; };
+		077F9761219FB5AE00CAD195 /* CourseSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9760219FB5AE00CAD195 /* CourseSearchTableViewCell.swift */; };
+		077F9763219FBAD700CAD195 /* CourseCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9762219FBAD700CAD195 /* CourseCreationViewController.swift */; };
 		07B7B1312195F6EC0049817E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B1302195F6EC0049817E /* AppDelegate.swift */; };
 		07B7B1362195F6EC0049817E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07B7B1342195F6EC0049817E /* Main.storyboard */; };
 		07B7B1392195F6EC0049817E /* ClassR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B1372195F6EC0049817E /* ClassR.xcdatamodeld */; };
@@ -38,6 +41,9 @@
 /* Begin PBXFileReference section */
 		077BC2FE2199024D00DAC1A1 /* Pulsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsing.swift; sourceTree = "<group>"; };
 		077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentViewController.swift; sourceTree = "<group>"; };
+		077F975E219F461200CAD195 /* CourseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchViewController.swift; sourceTree = "<group>"; };
+		077F9760219FB5AE00CAD195 /* CourseSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchTableViewCell.swift; sourceTree = "<group>"; };
+		077F9762219FBAD700CAD195 /* CourseCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCreationViewController.swift; sourceTree = "<group>"; };
 		07B7B12D2195F6EC0049817E /* ClassR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B7B1302195F6EC0049817E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07B7B1352195F6EC0049817E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,6 +86,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		077F975D219F45A700CAD195 /* Courses */ = {
+			isa = PBXGroup;
+			children = (
+				077F975E219F461200CAD195 /* CourseSearchViewController.swift */,
+				077F9762219FBAD700CAD195 /* CourseCreationViewController.swift */,
+				077F9760219FB5AE00CAD195 /* CourseSearchTableViewCell.swift */,
+				07B7B15D21969FCC0049817E /* Course.swift */,
+			);
+			path = Courses;
+			sourceTree = "<group>";
+		};
 		07B7B1242195F6EC0049817E = {
 			isa = PBXGroup;
 			children = (
@@ -101,11 +118,14 @@
 		07B7B12F2195F6EC0049817E /* ClassR */ = {
 			isa = PBXGroup;
 			children = (
+				07B7B14D219602A90049817E /* OpenSans-Bold.ttf */,
+				07B7B14F219603020049817E /* OpenSans-Light.ttf */,
+				07B7B14B219602780049817E /* OpenSans-Regular.ttf */,
 				07B7B1302195F6EC0049817E /* AppDelegate.swift */,
 				077BC2FE2199024D00DAC1A1 /* Pulsing.swift */,
 				07D81AE12199EB6100D76926 /* Fonts */,
 				07D81AE02199EB3E00D76926 /* News */,
-				07B7B15D21969FCC0049817E /* Course.swift */,
+				077F975D219F45A700CAD195 /* Courses */,
 				07B7B1342195F6EC0049817E /* Main.storyboard */,
 				07D81AE52199EC0100D76926 /* School */,
 				07D81AE22199EB7000D76926 /* Posts */,
@@ -146,9 +166,6 @@
 		07D81AE12199EB6100D76926 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				07B7B14D219602A90049817E /* OpenSans-Bold.ttf */,
-				07B7B14F219603020049817E /* OpenSans-Light.ttf */,
-				07B7B14B219602780049817E /* OpenSans-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -319,6 +336,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077F9761219FB5AE00CAD195 /* CourseSearchTableViewCell.swift in Sources */,
+				077F9763219FBAD700CAD195 /* CourseCreationViewController.swift in Sources */,
 				077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */,
 				07B7B15E21969FCC0049817E /* Course.swift in Sources */,
 				07B7B1562196315C0049817E /* CommentViewController.swift in Sources */,
@@ -329,6 +348,7 @@
 				07B7B154219608AA0049817E /* Status.swift in Sources */,
 				07B7B14A2195F74F0049817E /* NewsTableViewCell.swift in Sources */,
 				07B7B1482195F74F0049817E /* NewsTableView.swift in Sources */,
+				077F975F219F461200CAD195 /* CourseSearchViewController.swift in Sources */,
 				077F9758219D3AEB00CAD195 /* CreateCommentViewController.swift in Sources */,
 				07B7B15A2196335E0049817E /* CommentTableViewCell.swift in Sources */,
 				07D81AEE219AA38D00D76926 /* SchoolTableViewCell.swift in Sources */,

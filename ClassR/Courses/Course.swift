@@ -30,7 +30,17 @@ class Course {
         self.coursePeriod = coursePeriod
     }
     
-    static func loadCourses(schoolDatabaseID : String, onLoadedCourse : @escaping () -> ()) {
+    func addToDatabase() {
+        let databaseReference = Database.database().reference().child("courses").child(School.selectedSchoolDatabaseID).childByAutoId()
+        databaseReference.child("courseDepartment").setValue(self.courseDepartment)
+        databaseReference.child("courseName").setValue(self.courseName)
+        databaseReference.child("courseNumber").setValue(self.courseNumber)
+        databaseReference.child("courseInstructor").setValue(self.courseInstructor)
+        databaseReference.child("courseID").setValue(self.courseID)
+        databaseReference.child("coursePeriod").setValue(self.coursePeriod)
+    }
+    
+    static func loadCourses(schoolDatabaseID : String, completion : @escaping () -> ()) {
         Course.courses = [:]
         let ref = Database.database().reference()
         ref.child("courses").child(schoolDatabaseID).observe(.childAdded, with: { (snapshot) in
@@ -49,7 +59,7 @@ class Course {
                 
                 courses[currentCourseDatabaseID] = currentCourse
                 
-                onLoadedCourse()
+                completion()
             } else {
                 print("No courses found")
             }
