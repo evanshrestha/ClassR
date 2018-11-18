@@ -14,6 +14,14 @@ class CourseSearchViewController: UIViewController, UITableViewDelegate, UITable
     var postViewController : PostViewController?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if Course.courses.count == 0 {
+            var emptyLabel = UILabel()
+            emptyLabel.text = "Nothing seems to be here yet"
+            emptyLabel.textColor = self.view.backgroundColor
+            emptyLabel.font = UIFont(name: "Open Sans", size: CGFloat(17))
+            emptyLabel.textAlignment = NSTextAlignment.center
+            tableView.backgroundView = emptyLabel
+        }
         return Course.courses.count
     }
     

@@ -20,6 +20,14 @@ class NewsViewController: UITableViewController {
     private let pulldownRefreshControl = UIRefreshControl()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if Status.statuses.count == 0 {
+            var emptyLabel = UILabel()
+            emptyLabel.text = "Nothing seems to be here yet"
+            emptyLabel.textColor = UIColor.white
+            emptyLabel.font = UIFont(name: "Open Sans", size: CGFloat(17))
+            emptyLabel.textAlignment = NSTextAlignment.center
+            self.tableView.backgroundView = emptyLabel
+        }
         return Status.statuses.count
     }
     
