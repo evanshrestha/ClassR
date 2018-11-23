@@ -20,19 +20,17 @@ class NewsViewController: UITableViewController {
     private let pulldownRefreshControl = UIRefreshControl()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let emptyLabel = UILabel()
+        emptyLabel.text = "Nothing seems to be here yet"
+        emptyLabel.textColor = UIColor.white
+        emptyLabel.font = UIFont(name: "Open Sans", size: CGFloat(17))
+        emptyLabel.textAlignment = NSTextAlignment.center
         if Status.statuses.count == 0 {
-            var emptyLabel = UILabel()
-            emptyLabel.text = "Nothing seems to be here yet"
-            emptyLabel.textColor = UIColor.white
-            emptyLabel.font = UIFont(name: "Open Sans", size: CGFloat(17))
-            emptyLabel.textAlignment = NSTextAlignment.center
             self.tableView.backgroundView = emptyLabel
+        } else {
+            self.tableView.backgroundView = nil
         }
         return Status.statuses.count
-    }
-    
-    @IBAction func onRefreshButtonClick(_ sender: Any) {
-        reloadStatuses()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,6 +59,8 @@ class NewsViewController: UITableViewController {
         newsTableView.rowHeight = UITableView.automaticDimension
         newsTableView.estimatedRowHeight = 200
         
+        newsTableView.showsVerticalScrollIndicator = false
+        
         pulldownRefreshControl.tintColor = UIColor.white
         if #available(iOS 10.0, *) {
             newsTableView.refreshControl = pulldownRefreshControl
@@ -69,6 +69,7 @@ class NewsViewController: UITableViewController {
         }
         newsTableView.refreshControl!.addTarget(self, action: #selector(reloadStatuses), for: .valueChanged)
         reloadStatuses()
+        
     }
     
     @objc func reloadStatuses() {
