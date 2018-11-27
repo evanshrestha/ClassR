@@ -12,6 +12,7 @@ import Foundation
 class School {
     
     static var selectedSchoolDatabaseID = ""
+    static var selectedSchool : School?
     
     var databaseID = ""
     var name = ""

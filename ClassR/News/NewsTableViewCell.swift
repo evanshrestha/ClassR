@@ -16,10 +16,10 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var newsTextLabel: UILabel!
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var newsContentView: UIView!
+    @IBOutlet weak var ribbonView: RibbonView!
+    @IBOutlet weak var circleView: CircleView!
     
     var status : Status?
-    
-    var liked : Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -28,7 +28,7 @@ class NewsTableViewCell: UITableViewCell {
     @objc func onDoubleTap(sender: UIGestureRecognizer){
         onLike()
         let pulse = Pulsing(numberOfPulses: 1, radius: 90, position: sender.location(in: newsView))
-        if (liked) {
+        if (status!.liked) {
             pulse.animationDuration = 0.8
             pulse.backgroundColor = UIColor(hexString: "#00A8E8").cgColor
         } else {
@@ -54,7 +54,7 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     func updateLikeButton() {
-        if (liked) {
+        if (status!.liked) {
             likeButton.setTitle("Liked", for: .normal)
             likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
         } else {
@@ -68,7 +68,7 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     func onLike() {
-        liked = !liked
+        status!.liked = !status!.liked
         updateLikeButton()
     }
     
@@ -77,6 +77,7 @@ class NewsTableViewCell: UITableViewCell {
     }
     
 }
+
 extension UIColor {
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

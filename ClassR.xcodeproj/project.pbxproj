@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0776D9CC21ACCEBC00C4A4E1 /* RibbonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0776D9CB21ACCEBC00C4A4E1 /* RibbonView.swift */; };
+		0776D9CE21ACE26E00C4A4E1 /* circleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0776D9CD21ACE26E00C4A4E1 /* circleView.swift */; };
 		077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC2FE2199024D00DAC1A1 /* Pulsing.swift */; };
 		077F9758219D3AEB00CAD195 /* CreateCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */; };
 		077F975F219F461200CAD195 /* CourseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F975E219F461200CAD195 /* CourseSearchViewController.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0776D9CB21ACCEBC00C4A4E1 /* RibbonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RibbonView.swift; sourceTree = "<group>"; };
+		0776D9CD21ACE26E00C4A4E1 /* circleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = circleView.swift; sourceTree = "<group>"; };
 		077BC2FE2199024D00DAC1A1 /* Pulsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsing.swift; sourceTree = "<group>"; };
 		077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentViewController.swift; sourceTree = "<group>"; };
 		077F975E219F461200CAD195 /* CourseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 				07D81AE02199EB3E00D76926 /* News */,
 				077F975D219F45A700CAD195 /* Courses */,
 				07B7B1342195F6EC0049817E /* Main.storyboard */,
+				0776D9CD21ACE26E00C4A4E1 /* circleView.swift */,
+				0776D9CB21ACCEBC00C4A4E1 /* RibbonView.swift */,
 				07D81AE52199EC0100D76926 /* School */,
 				07D81AE22199EB7000D76926 /* Posts */,
 				07D81ADF2199EB2900D76926 /* Comments */,
@@ -340,12 +346,14 @@
 				077F9763219FBAD700CAD195 /* CourseCreationViewController.swift in Sources */,
 				077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */,
 				07B7B15E21969FCC0049817E /* Course.swift in Sources */,
+				0776D9CE21ACE26E00C4A4E1 /* circleView.swift in Sources */,
 				07B7B1562196315C0049817E /* CommentViewController.swift in Sources */,
 				07B7B158219632E40049817E /* CommentTableView.swift in Sources */,
 				07F4F0FE2198C547008D99C5 /* PostViewController.swift in Sources */,
 				07D81AF1219B305400D76926 /* Comment.swift in Sources */,
 				07B7B1312195F6EC0049817E /* AppDelegate.swift in Sources */,
 				07B7B154219608AA0049817E /* Status.swift in Sources */,
+				0776D9CC21ACCEBC00C4A4E1 /* RibbonView.swift in Sources */,
 				07B7B14A2195F74F0049817E /* NewsTableViewCell.swift in Sources */,
 				07B7B1482195F74F0049817E /* NewsTableView.swift in Sources */,
 				077F975F219F461200CAD195 /* CourseSearchViewController.swift in Sources */,

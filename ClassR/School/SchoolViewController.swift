@@ -31,6 +31,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         School.selectedSchoolDatabaseID = schools[indexPath.row]!.databaseID
+        School.selectedSchool = schools[indexPath.row]
         performSegue(withIdentifier: "showSchoolPosts", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }

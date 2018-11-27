@@ -14,6 +14,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var insideView: UIView!
     @IBOutlet var outsideTapGestureRecognizer: UITapGestureRecognizer!
     
+    @IBOutlet weak var optionsButton: UIButton!
     var newsViewController : NewsViewController?
     var selectedCourse : Course?
     @IBOutlet weak var selectCourseButton: UIButton!
@@ -28,6 +29,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
             newPostReference.child("statusText").setValue(self.postTextField.text!)
             newPostReference.child("courseReferenceID").setValue(self.selectedCourse?.databaseID)
             newPostReference.child("datePosted").setValue(Date().description)
+            newPostReference.child("uuid").setValue(UIDevice.current.identifierForVendor!.uuidString)
             
             DispatchQueue.main.async {
                 var postCreated = false
@@ -90,5 +92,23 @@ class PostViewController: UIViewController, UITextViewDelegate{
         }
     }
  
-
+    @IBAction func onOptionsClick(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let photoAction = UIAlertAction(title: "Take Photo...", style: .default) { (_) in }
+        let libraryAction = UIAlertAction(title: "Choose from Library...", style: .default) { (_) in
+            print("test")
+            let imagePicker = UIImagePickerController()
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        
+        alertController.addAction(photoAction)
+        alertController.addAction(libraryAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true) {
+            
+        }
+    }
+    
 }

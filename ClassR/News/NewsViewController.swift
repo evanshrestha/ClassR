@@ -13,6 +13,7 @@ class NewsViewController: UITableViewController {
     
     @IBOutlet weak var newsTableView: NewsTableView!
     
+    @IBOutlet weak var newsNavigationItem: UINavigationItem!
     var postNumber = 0
     
     static var selectedStatus : Status?
@@ -51,6 +52,30 @@ class NewsViewController: UITableViewController {
         
         cell.status = status
         
+        if status.uuid == UIDevice.current.identifierForVendor!.uuidString {
+            var n = Int.random(in: 0..<16*16*16*16*16*16)
+            var st = String(format:"%06X", n)
+            cell.ribbonView.color = UIColor.init(hexString: "#" + st)
+            cell.ribbonView.isHidden = false
+            cell.circleView.isHidden = true
+        } else {
+            var n = Int.random(in: 0..<16*16*16*16*16*16)
+            var st = String(format:"%06X", n)
+            
+            cell.circleView.color = UIColor.init(hexString: "#" + st)
+            cell.ribbonView.color = UIColor.init(hexString: "#" + st)
+            cell.ribbonView.isHidden = true
+            cell.circleView.isHidden = false
+        }
+        
+        if (status.liked) {
+            cell.likeButton.setTitle("Liked", for: .normal)
+            cell.likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
+        } else {
+            cell.likeButton.setTitle("Like", for: .normal)
+            cell.likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
+        }
+        
         return cell
     }
 
@@ -69,6 +94,8 @@ class NewsViewController: UITableViewController {
         }
         newsTableView.refreshControl!.addTarget(self, action: #selector(reloadStatuses), for: .valueChanged)
         reloadStatuses()
+        
+        newsNavigationItem.title = School.selectedSchool?.nickname
         
     }
     
@@ -112,3 +139,4 @@ class NewsViewController: UITableViewController {
     }
     
 }
+

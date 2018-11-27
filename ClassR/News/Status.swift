@@ -14,6 +14,8 @@ class Status {
     var statusText : String = ""
     var datePosted : Date = Date()
     var databaseID : String = ""
+    var uuid : String = ""
+    var liked : Bool = false
     
     static var statuses : [Int: [String: Status]] = [:]
     static var doneLoading : Bool = false
@@ -34,8 +36,12 @@ class Status {
                     let currentCourseReferenceID = currentStatusInfo["courseReferenceID"] as? String {
                         let currentStatus = Status(courseReferenceID: currentCourseReferenceID, statusText: currentStatusText)
                         currentStatus.databaseID = snapshot.key
+                    if let uuid = currentStatusInfo["uuid"] as? String {
+                        currentStatus.uuid = uuid
+                    }
                         Status.statuses[index] = [snapshot.key : currentStatus]
                         index = index + 1
+
                 
                 
                 }
