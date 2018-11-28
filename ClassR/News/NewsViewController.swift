@@ -35,48 +35,103 @@ class NewsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsTableViewCell
-        let statusDatabaseID = Status.statuses[Status.statuses.count - indexPath.row - 1]!.keys.first!
-        let status = Status.statuses[Status.statuses.count - indexPath.row - 1]![statusDatabaseID]!
         
-        let statusText = status.statusText
-        let courseDatabaseID = status.courseReferenceID
-        if let course = Course.courses[courseDatabaseID] {
-            cell.classNameLabel.text = course.courseName
-        } else {
-            cell.classNameLabel.text = ""
-        }
-        
-        
-        cell.newsTextLabel.text = statusText
-        
-        cell.status = status
-        
-        if status.uuid == UIDevice.current.identifierForVendor!.uuidString {
-            var n = Int.random(in: 0..<16*16*16*16*16*16)
-            var st = String(format:"%06X", n)
-            cell.ribbonView.color = UIColor.init(hexString: "#" + st)
-            cell.ribbonView.isHidden = false
-            cell.circleView.isHidden = true
-        } else {
-            var n = Int.random(in: 0..<16*16*16*16*16*16)
-            var st = String(format:"%06X", n)
+        if let statusDatabaseID = Status.statuses[Status.statuses.count - indexPath.row - 1]?.keys.first {
+            let status = Status.statuses[Status.statuses.count - indexPath.row - 1]![statusDatabaseID]!
             
-            cell.circleView.color = UIColor.init(hexString: "#" + st)
-            cell.ribbonView.color = UIColor.init(hexString: "#" + st)
-            cell.ribbonView.isHidden = true
-            cell.circleView.isHidden = false
+            
+            if (!status.imageReferencePath.isEmpty) {
+                
+                // If status contains an image
+                let cell = tableView.dequeueReusableCell(withIdentifier: "newsImageCell") as! NewsImageTableViewCell
+                let statusText = status.statusText
+                let courseDatabaseID = status.courseReferenceID
+                if let course = Course.courses[courseDatabaseID] {
+                    cell.courseNameLabel.text = course.courseName
+                } else {
+                    cell.courseNameLabel.text = ""
+                }
+                cell.statusTextLabel.text = statusText
+                
+                cell.status = status
+                
+                if status.uuid == UIDevice.current.identifierForVendor!.uuidString {
+                    let n = Int.random(in: 0..<16*16*16*16*16*16)
+                    var st = String(format:"%06X", n)
+                    cell.ribbonView.isHidden = false
+                } else {
+                    let n = Int.random(in: 0..<16*16*16*16*16*16)
+                    var st = String(format:"%06X", n)
+                    
+                    cell.ribbonView.isHidden = true
+                }
+                
+                if (status.liked) {
+                    cell.likeButton.setTitle("Liked", for: .normal)
+                    cell.likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
+                } else {
+                    cell.likeButton.setTitle("Like", for: .normal)
+                    cell.likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
+                }
+                
+                // Initialize with empty image
+                cell.statusImageView.image = nil
+                
+                // Load image
+                let imageRef = Storage.storage().reference(withPath: "images/" + School.selectedSchoolDatabaseID + "/" + status.imageReferencePath)
+                
+                // Max size is 10MB
+                imageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
+                    if error != nil {
+                        print("ERROR WITH DOWNLOADING IMAGE")
+                    } else {
+                        let image = UIImage(data: data!)
+                        let ratio = image!.size.width / image!.size.height
+                        let newHeight = cell.statusImageView.frame.width / ratio
+                        cell.statusImageView.image = image
+                        cell.imageHeightConstraint.constant = newHeight
+                    }
+                }
+                
+                return cell
+            } else {
+                // If status does not contain an image
+                let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsTableViewCell
+                let statusText = status.statusText
+                let courseDatabaseID = status.courseReferenceID
+                if let course = Course.courses[courseDatabaseID] {
+                    cell.classNameLabel.text = course.courseName
+                } else {
+                    cell.classNameLabel.text = ""
+                }
+                cell.newsTextLabel.text = statusText
+                
+                cell.status = status
+                
+                if status.uuid == UIDevice.current.identifierForVendor!.uuidString {
+                    let n = Int.random(in: 0..<16*16*16*16*16*16)
+                    var st = String(format:"%06X", n)
+                    cell.ribbonView.isHidden = false
+                    cell.circleView.isHidden = true
+                } else {
+                    let n = Int.random(in: 0..<16*16*16*16*16*16)
+                    var st = String(format:"%06X", n)
+                    
+                    cell.ribbonView.isHidden = true
+                    cell.circleView.isHidden = true
+                }
+                
+                if (status.liked) {
+                    cell.likeButton.setTitle("Liked", for: .normal)
+                    cell.likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
+                } else {
+                    cell.likeButton.setTitle("Like", for: .normal)
+                    cell.likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
+                }
+                return cell
+            }
         }
-        
-        if (status.liked) {
-            cell.likeButton.setTitle("Liked", for: .normal)
-            cell.likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
-        } else {
-            cell.likeButton.setTitle("Like", for: .normal)
-            cell.likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
-        }
-        
-        return cell
+        return tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsTableViewCell
     }
 
     override func viewDidLoad() {
@@ -123,15 +178,18 @@ class NewsViewController: UITableViewController {
             if let destination = segue.destination as? PostViewController {
                 destination.newsViewController = self
             }
-        }
-        
-        if (segue.identifier == "statusToCommentsSegue") {
+        } else if (segue.identifier == "statusToCommentsSegue") {
             if let destination = segue.destination as? CommentViewController {
                 let status = NewsViewController.selectedStatus
                 destination.status = status
                 destination.course = Course.courses[(status?.courseReferenceID)!]
             }
-            
+        } else if (segue.identifier == "statusImageToCommentsSegue") {
+            if let destination = segue.destination as? CommentViewController {
+                let status = NewsViewController.selectedStatus
+                destination.status = status
+                destination.course = Course.courses[(status?.courseReferenceID)!]
+            }
         }
     }
     

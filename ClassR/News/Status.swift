@@ -16,6 +16,7 @@ class Status {
     var databaseID : String = ""
     var uuid : String = ""
     var liked : Bool = false
+    var imageReferencePath : String = ""
     
     static var statuses : [Int: [String: Status]] = [:]
     static var doneLoading : Bool = false
@@ -38,6 +39,9 @@ class Status {
                         currentStatus.databaseID = snapshot.key
                     if let uuid = currentStatusInfo["uuid"] as? String {
                         currentStatus.uuid = uuid
+                    }
+                    if let imageRef = currentStatusInfo["imageReferencePath"] as? String {
+                        currentStatus.imageReferencePath = imageRef
                     }
                         Status.statuses[index] = [snapshot.key : currentStatus]
                         index = index + 1

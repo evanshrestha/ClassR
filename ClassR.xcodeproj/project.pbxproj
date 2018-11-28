@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0776D9CC21ACCEBC00C4A4E1 /* RibbonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0776D9CB21ACCEBC00C4A4E1 /* RibbonView.swift */; };
 		0776D9CE21ACE26E00C4A4E1 /* circleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0776D9CD21ACE26E00C4A4E1 /* circleView.swift */; };
+		0776D9D021AE04A900C4A4E1 /* NewsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0776D9CF21AE04A900C4A4E1 /* NewsImageTableViewCell.swift */; };
 		077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC2FE2199024D00DAC1A1 /* Pulsing.swift */; };
 		077F9758219D3AEB00CAD195 /* CreateCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */; };
 		077F975F219F461200CAD195 /* CourseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F975E219F461200CAD195 /* CourseSearchViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		0776D9CB21ACCEBC00C4A4E1 /* RibbonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RibbonView.swift; sourceTree = "<group>"; };
 		0776D9CD21ACE26E00C4A4E1 /* circleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = circleView.swift; sourceTree = "<group>"; };
+		0776D9CF21AE04A900C4A4E1 /* NewsImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsImageTableViewCell.swift; sourceTree = "<group>"; };
 		077BC2FE2199024D00DAC1A1 /* Pulsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsing.swift; sourceTree = "<group>"; };
 		077F9757219D3AEB00CAD195 /* CreateCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentViewController.swift; sourceTree = "<group>"; };
 		077F975E219F461200CAD195 /* CourseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				07B7B153219608AA0049817E /* Status.swift */,
 				07B7B1472195F74F0049817E /* NewsTableViewCell.swift */,
+				0776D9CF21AE04A900C4A4E1 /* NewsImageTableViewCell.swift */,
 				07B7B1462195F74F0049817E /* NewsViewController.swift */,
 				07B7B1452195F74F0049817E /* NewsTableView.swift */,
 			);
@@ -344,6 +347,7 @@
 			files = (
 				077F9761219FB5AE00CAD195 /* CourseSearchTableViewCell.swift in Sources */,
 				077F9763219FBAD700CAD195 /* CourseCreationViewController.swift in Sources */,
+				0776D9D021AE04A900C4A4E1 /* NewsImageTableViewCell.swift in Sources */,
 				077BC2FF2199024D00DAC1A1 /* Pulsing.swift in Sources */,
 				07B7B15E21969FCC0049817E /* Course.swift in Sources */,
 				0776D9CE21ACE26E00C4A4E1 /* circleView.swift in Sources */,

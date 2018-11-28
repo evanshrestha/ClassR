@@ -9,19 +9,26 @@
 import UIKit
 import Firebase
 
-class PostViewController: UIViewController, UITextViewDelegate{
+class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
     @IBOutlet weak var insideView: UIView!
     @IBOutlet var outsideTapGestureRecognizer: UITapGestureRecognizer!
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var optionsButton: UIButton!
     var newsViewController : NewsViewController?
     var selectedCourse : Course?
     @IBOutlet weak var selectCourseButton: UIButton!
     
+    let imagePicker = UIImagePickerController()
     
     @IBOutlet weak var postTextField: UITextView!
     @IBAction func onPostButtonClick(_ sender: Any) {
+        
+        if (postTextField.text.isEmpty || selectedCourse == nil) {
+            return
+        }
+        
         var ref: DatabaseReference!
         ref = Database.database().reference()
         
@@ -30,6 +37,19 @@ class PostViewController: UIViewController, UITextViewDelegate{
             newPostReference.child("courseReferenceID").setValue(self.selectedCourse?.databaseID)
             newPostReference.child("datePosted").setValue(Date().description)
             newPostReference.child("uuid").setValue(UIDevice.current.identifierForVendor!.uuidString)
+        
+        if let selectedImage = imageView.image {
+            
+            let imageUUID = NSUUID()
+            let storageRef = Storage.storage().reference()
+            let imageRef = storageRef.child("images").child(School.selectedSchoolDatabaseID).child(
+                imageUUID.uuidString + ".jpg")
+            
+            newPostReference.child("imageReferencePath").setValue(imageUUID.uuidString + ".jpg")
+            var data = selectedImage.jpegData(compressionQuality: 0.8)
+            imageRef.putData(data!, metadata: nil)
+            
+        }
             
             DispatchQueue.main.async {
                 var postCreated = false
@@ -78,6 +98,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
         self.view.addGestureRecognizer(tapGesture)
         self.postTextField.layer.borderColor = UIColor.lightGray.cgColor
         self.postTextField.layer.cornerRadius = 10
+        imagePicker.delegate = self
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -97,9 +118,9 @@ class PostViewController: UIViewController, UITextViewDelegate{
         
         let photoAction = UIAlertAction(title: "Take Photo...", style: .default) { (_) in }
         let libraryAction = UIAlertAction(title: "Choose from Library...", style: .default) { (_) in
-            print("test")
-            let imagePicker = UIImagePickerController()
-            self.present(imagePicker, animated: true, completion: nil)
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
@@ -110,5 +131,14 @@ class PostViewController: UIViewController, UITextViewDelegate{
             
         }
     }
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imageView.image = pickedImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
     
+    @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 }
