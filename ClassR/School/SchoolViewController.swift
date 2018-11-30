@@ -59,7 +59,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSchools()
@@ -80,7 +80,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let entity = NSEntityDescription.entity(forEntityName: "Settings", in: context!)
                 settings = NSManagedObject(entity: entity!, insertInto: context)
             } else {
-            
+                
                 for data in result as! [NSManagedObject] {
                     settings = data
                     savedSchoolDatabaseID = data.value(forKey: "school") as! String
@@ -89,6 +89,8 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } catch {
             print("error with coredata")
         }
+        
+        
         
     }
     
@@ -123,23 +125,16 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         schoolTableView.reloadData()
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showSchoolPosts") {
             //(segue.destination as! NewsViewController).schoolDatabaseID = self.selectedSchoolDatabaseID
         }
     }
-
+    
 }

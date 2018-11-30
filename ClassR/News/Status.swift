@@ -35,19 +35,19 @@ class Status {
             if let currentStatusInfo = snapshot.value as? NSDictionary {
                 if let currentStatusText = currentStatusInfo["statusText"] as? String,
                     let currentCourseReferenceID = currentStatusInfo["courseReferenceID"] as? String {
-                        let currentStatus = Status(courseReferenceID: currentCourseReferenceID, statusText: currentStatusText)
-                        currentStatus.databaseID = snapshot.key
+                    let currentStatus = Status(courseReferenceID: currentCourseReferenceID, statusText: currentStatusText)
+                    currentStatus.databaseID = snapshot.key
                     if let uuid = currentStatusInfo["uuid"] as? String {
                         currentStatus.uuid = uuid
                     }
                     if let imageRef = currentStatusInfo["imageReferencePath"] as? String {
                         currentStatus.imageReferencePath = imageRef
                     }
-                        Status.statuses[index] = [snapshot.key : currentStatus]
-                        index = index + 1
-
-                
-                
+                    Status.statuses[index] = [snapshot.key : currentStatus]
+                    index = index + 1
+                    
+                    
+                    
                 }
                 onLoadedStatus()
             } else {

@@ -13,7 +13,7 @@ class RibbonView: UIView {
     
     var color = UIColor.red
     var isRibbon = true
-
+    
     override func draw(_ rect: CGRect) {
         if isRibbon {
             let path = UIBezierPath()
@@ -32,6 +32,6 @@ class RibbonView: UIView {
             path.fill()
         }
     }
-
-
+    
+    
 }

@@ -93,6 +93,17 @@ class NewsViewController: UITableViewController {
                     }
                 }
                 
+                cell.foldView.color = cell.backgroundColor!
+                cell.foldView.foldColor = cell.courseNameLabel.textColor
+                
+                if (cell.folded) {
+                    cell.foldView.alpha = 1
+                } else {
+                    cell.foldView.alpha = 0
+                }
+                
+                cell.updateLikeButton()
+                
                 return cell
             } else {
                 // If status does not contain an image
@@ -128,12 +139,24 @@ class NewsViewController: UITableViewController {
                     cell.likeButton.setTitle("Like", for: .normal)
                     cell.likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
                 }
+                
+                cell.foldView.color = cell.backgroundColor!
+                cell.foldView.foldColor = cell.classNameLabel.textColor
+                
+                if (cell.folded) {
+                    cell.foldView.alpha = 1
+                } else {
+                    cell.foldView.alpha = 0
+                }
+                
+                
+                cell.updateLikeButton()
                 return cell
             }
         }
         return tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsTableViewCell
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         newsTableView.rowHeight = UITableView.automaticDimension
@@ -155,7 +178,7 @@ class NewsViewController: UITableViewController {
     }
     
     @objc func reloadStatuses() {
-    
+        
         Course.loadCourses(schoolDatabaseID: School.selectedSchoolDatabaseID, completion: {
             self.newsTableView.reloadData()
         })
@@ -171,7 +194,7 @@ class NewsViewController: UITableViewController {
     }
     
     
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showAddPost") {
@@ -194,6 +217,11 @@ class NewsViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        Toast(text: "Say hi to \(School.selectedSchool?.nickname ?? "your school")")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.newsTableView.reloadData()
     }
     
 }

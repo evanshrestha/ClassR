@@ -16,6 +16,6 @@ class CircleView: UIView {
         let path = UIBezierPath(ovalIn: bounds)
         color.setFill()
         path.fill()
-    
+        
     }
 }

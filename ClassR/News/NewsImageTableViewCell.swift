@@ -9,9 +9,10 @@
 import UIKit
 
 class NewsImageTableViewCell: UITableViewCell {
-
+    
     // Store status
     var status: Status?
+    var folded: Bool = false
     
     // Add views
     @IBOutlet weak var courseNameLabel: UILabel!
@@ -22,6 +23,7 @@ class NewsImageTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var foldView: FoldView!
     
     @IBAction func onCommentsClick(_ sender: Any) {
         NewsViewController.selectedStatus = self.status
@@ -60,15 +62,35 @@ class NewsImageTableViewCell: UITableViewCell {
         }
         self.layer.insertSublayer(pulse, above: newsView.layer)
     }
+    
+    @objc func onFoldTap(sender: UIGestureRecognizer) {
+        
+        if (self.foldView.bounds.contains(sender.location(in: self.foldView))) {
+            self.folded = !self.folded
+            if (self.folded) {
+                self.foldView.alpha = 1
+                Toast(text: "Saved")
+            } else {
+                self.foldView.alpha = 0
+                Toast(text: "Unsaved")
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(onDoubleTap(sender:)))
         doubleTapGesture.numberOfTapsRequired = 2
-        addGestureRecognizer(doubleTapGesture)    }
-
+        addGestureRecognizer(doubleTapGesture)
+        
+        let foldTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFoldTap(sender:)))
+        addGestureRecognizer(foldTapGesture)
+    }
+        
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
 }

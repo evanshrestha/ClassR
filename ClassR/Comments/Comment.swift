@@ -33,7 +33,7 @@ class Comment {
                     let currentCommentCreatorUUID = currentCommentInfo["uuid"] as? String,
                     let currentCommentCreatorNickname = currentCommentInfo["nickname"] as? String,
                     let currentCommentDateCreated = currentCommentInfo["dateCreated"] as? String {
-                
+                    
                     let currentComment = Comment()
                     currentComment.status = selectedStatus
                     currentComment.creatorUUID = currentCommentCreatorUUID
@@ -53,7 +53,7 @@ class Comment {
         }) { (error) in
             print(error.localizedDescription)
         }
-
+        
     }
     
     

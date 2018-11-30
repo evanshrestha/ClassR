@@ -32,6 +32,8 @@
 		07B7B15A2196335E0049817E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B1592196335E0049817E /* CommentTableViewCell.swift */; };
 		07B7B15C21967ED40049817E /* CommentHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B15B21967ED40049817E /* CommentHeaderTableViewCell.swift */; };
 		07B7B15E21969FCC0049817E /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B7B15D21969FCC0049817E /* Course.swift */; };
+		07D4BD8D21B0DCD10018F9D7 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4BD8C21B0DCD10018F9D7 /* Toast.swift */; };
+		07D4BD8F21B0E59F0018F9D7 /* FoldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4BD8E21B0E59F0018F9D7 /* FoldView.swift */; };
 		07D81AE92199ECD100D76926 /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D81AE82199ECD100D76926 /* SchoolViewController.swift */; };
 		07D81AEE219AA38D00D76926 /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D81AEC219AA38D00D76926 /* SchoolTableViewCell.swift */; };
 		07D81AEF219AA38D00D76926 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D81AED219AA38D00D76926 /* School.swift */; };
@@ -69,6 +71,8 @@
 		07B7B1592196335E0049817E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		07B7B15B21967ED40049817E /* CommentHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		07B7B15D21969FCC0049817E /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		07D4BD8C21B0DCD10018F9D7 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		07D4BD8E21B0E59F0018F9D7 /* FoldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldView.swift; sourceTree = "<group>"; };
 		07D81AE82199ECD100D76926 /* SchoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolViewController.swift; path = ClassR/School/SchoolViewController.swift; sourceTree = SOURCE_ROOT; };
 		07D81AEC219AA38D00D76926 /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolTableViewCell.swift; path = ClassR/School/SchoolTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		07D81AED219AA38D00D76926 /* School.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = School.swift; path = ClassR/School/School.swift; sourceTree = SOURCE_ROOT; };
@@ -127,12 +131,14 @@
 				07B7B14D219602A90049817E /* OpenSans-Bold.ttf */,
 				07B7B14F219603020049817E /* OpenSans-Light.ttf */,
 				07B7B14B219602780049817E /* OpenSans-Regular.ttf */,
+				07D4BD8C21B0DCD10018F9D7 /* Toast.swift */,
 				07B7B1302195F6EC0049817E /* AppDelegate.swift */,
 				077BC2FE2199024D00DAC1A1 /* Pulsing.swift */,
 				07D81AE12199EB6100D76926 /* Fonts */,
 				07D81AE02199EB3E00D76926 /* News */,
 				077F975D219F45A700CAD195 /* Courses */,
 				07B7B1342195F6EC0049817E /* Main.storyboard */,
+				07D4BD8E21B0E59F0018F9D7 /* FoldView.swift */,
 				0776D9CD21ACE26E00C4A4E1 /* circleView.swift */,
 				0776D9CB21ACCEBC00C4A4E1 /* RibbonView.swift */,
 				07D81AE52199EC0100D76926 /* School */,
@@ -360,6 +366,7 @@
 				0776D9CC21ACCEBC00C4A4E1 /* RibbonView.swift in Sources */,
 				07B7B14A2195F74F0049817E /* NewsTableViewCell.swift in Sources */,
 				07B7B1482195F74F0049817E /* NewsTableView.swift in Sources */,
+				07D4BD8F21B0E59F0018F9D7 /* FoldView.swift in Sources */,
 				077F975F219F461200CAD195 /* CourseSearchViewController.swift in Sources */,
 				077F9758219D3AEB00CAD195 /* CreateCommentViewController.swift in Sources */,
 				07B7B15A2196335E0049817E /* CommentTableViewCell.swift in Sources */,
@@ -367,6 +374,7 @@
 				07D81AE92199ECD100D76926 /* SchoolViewController.swift in Sources */,
 				07B7B1492195F74F0049817E /* NewsViewController.swift in Sources */,
 				07B7B15C21967ED40049817E /* CommentHeaderTableViewCell.swift in Sources */,
+				07D4BD8D21B0DCD10018F9D7 /* Toast.swift in Sources */,
 				07B7B1392195F6EC0049817E /* ClassR.xcdatamodeld in Sources */,
 				07D81AEF219AA38D00D76926 /* School.swift in Sources */,
 			);

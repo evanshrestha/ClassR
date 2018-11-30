@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-
+    
     @IBOutlet weak var insideView: UIView!
     @IBOutlet var outsideTapGestureRecognizer: UITapGestureRecognizer!
     
@@ -32,11 +32,11 @@ class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerCon
         var ref: DatabaseReference!
         ref = Database.database().reference()
         
-            let newPostReference = ref.child("statuses").child(School.selectedSchoolDatabaseID).childByAutoId()
-            newPostReference.child("statusText").setValue(self.postTextField.text!)
-            newPostReference.child("courseReferenceID").setValue(self.selectedCourse?.databaseID)
-            newPostReference.child("datePosted").setValue(Date().description)
-            newPostReference.child("uuid").setValue(UIDevice.current.identifierForVendor!.uuidString)
+        let newPostReference = ref.child("statuses").child(School.selectedSchoolDatabaseID).childByAutoId()
+        newPostReference.child("statusText").setValue(self.postTextField.text!)
+        newPostReference.child("courseReferenceID").setValue(self.selectedCourse?.databaseID)
+        newPostReference.child("datePosted").setValue(Date().description)
+        newPostReference.child("uuid").setValue(UIDevice.current.identifierForVendor!.uuidString)
         
         if let selectedImage = imageView.image {
             
@@ -50,29 +50,29 @@ class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerCon
             imageRef.putData(data!, metadata: nil)
             
         }
-            
-            DispatchQueue.main.async {
-                var postCreated = false
-                var numChecks = 0
-                while (!postCreated && numChecks < 5) {
-                    
-                    usleep(200000)
-                    self.newsViewController?.reloadStatuses()
-                    for dict in Status.statuses.values {
-                        for status in dict.values {
-                            if status.databaseID == newPostReference.key {
-                                postCreated = true
-                                self.closePostViewController()
-                                break
-                            }
+        
+        DispatchQueue.main.async {
+            var postCreated = false
+            var numChecks = 0
+            while (!postCreated && numChecks < 5) {
+                
+                usleep(200000)
+                self.newsViewController?.reloadStatuses()
+                for dict in Status.statuses.values {
+                    for status in dict.values {
+                        if status.databaseID == newPostReference.key {
+                            postCreated = true
+                            self.closePostViewController()
+                            break
                         }
                     }
-                    numChecks = numChecks + 1
                 }
-                if (!postCreated) {
-                    self.closePostViewController()
-                }
+                numChecks = numChecks + 1
             }
+            if (!postCreated) {
+                self.closePostViewController()
+            }
+        }
     }
     
     func selectCourse(selectedCourse: Course) {
@@ -104,7 +104,7 @@ class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerCon
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         postTextField.resignFirstResponder()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "postToCourseSelectionSegue") {
             if let destination = segue.destination as? CourseSearchViewController {
@@ -112,7 +112,7 @@ class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerCon
             }
         }
     }
- 
+    
     @IBAction func onOptionsClick(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         

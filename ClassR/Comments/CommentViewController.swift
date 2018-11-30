@@ -22,9 +22,15 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! CommentHeaderTableViewCell
+            
             cell.headerTextLabel.text = status?.statusText
             cell.classNameLabel.text = course?.courseName
             cell.headerView.layer.cornerRadius = CGFloat(10)
+            
+            // Transfer status to cell
+            cell.status = status!
+            cell.updateLikeStatus()
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell") as! CommentTableViewCell
@@ -32,18 +38,11 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.commentView.layer.cornerRadius = CGFloat(10)
             cell.commentNameLabel.text = currentComment?.creatorNickname
             cell.commentTextLabel.text = currentComment?.text
+            
             return cell
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if (indexPath.row == 0) {
-//            return CGFloat(130)
-//        }
-//        return CGFloat(100)
-//    }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         commentTableView.delegate = self
@@ -70,15 +69,4 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         Get the new view controller using segue.destination.
-         Pass the selected object to the new view controller.
-    }
-    */
-
 }

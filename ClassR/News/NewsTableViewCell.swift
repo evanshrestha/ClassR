@@ -9,7 +9,7 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var classNameLabel: UILabel!
@@ -18,8 +18,10 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var newsContentView: UIView!
     @IBOutlet weak var ribbonView: RibbonView!
     @IBOutlet weak var circleView: CircleView!
+    @IBOutlet weak var foldView: FoldView!
     
     var status : Status?
+    var folded: Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -36,8 +38,20 @@ class NewsTableViewCell: UITableViewCell {
             pulse.backgroundColor = UIColor(hexString: "#6F7179").cgColor
         }
         self.layer.insertSublayer(pulse, above: newsView.layer)
+    }
+    
+    @objc func onFoldTap(sender: UIGestureRecognizer) {
         
-        print(UIDevice.current.identifierForVendor!.uuidString)
+        if (self.foldView.bounds.contains(sender.location(in: self.foldView))) {
+            self.folded = !self.folded
+            if (self.folded) {
+                self.foldView.alpha = 1
+                Toast(text: "Saved")
+            } else {
+                self.foldView.alpha = 0
+                Toast(text: "Unsaved")
+            }
+        }
     }
     
     override func awakeFromNib() {
@@ -46,9 +60,12 @@ class NewsTableViewCell: UITableViewCell {
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(onDoubleTap(sender:)))
         doubleTapGesture.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTapGesture)
+        
+        let foldTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFoldTap(sender:)))
+        addGestureRecognizer(foldTapGesture)
     }
     
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
