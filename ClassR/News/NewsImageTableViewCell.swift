@@ -12,7 +12,6 @@ class NewsImageTableViewCell: UITableViewCell {
     
     // Store status
     var status: Status?
-    var folded: Bool = false
     
     // Add views
     @IBOutlet weak var courseNameLabel: UILabel!
@@ -24,6 +23,7 @@ class NewsImageTableViewCell: UITableViewCell {
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var foldView: FoldView!
+    @IBOutlet weak var likeCountLabel: UILabel!
     
     @IBAction func onCommentsClick(_ sender: Any) {
         NewsViewController.selectedStatus = self.status
@@ -38,15 +38,18 @@ class NewsImageTableViewCell: UITableViewCell {
     }
     
     func onLike() {
-        status!.liked = !status!.liked
+        status!.onLike()
         updateLikeButton()
+        self.likeCountLabel.text = String(status!.likeCount)
     }
     func updateLikeButton() {
         if (status!.liked) {
             likeButton.setTitle("Liked", for: .normal)
+            likeCountLabel.textColor = UIColor(hexString: "#00A8E8")
             likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
         } else {
             likeButton.setTitle("Like", for: .normal)
+            likeCountLabel.textColor = UIColor(hexString: "#6F7179")
             likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
         }
     }
@@ -66,13 +69,14 @@ class NewsImageTableViewCell: UITableViewCell {
     @objc func onFoldTap(sender: UIGestureRecognizer) {
         
         if (self.foldView.bounds.contains(sender.location(in: self.foldView))) {
-            self.folded = !self.folded
-            if (self.folded) {
+            if (!status!.saved) {
                 self.foldView.alpha = 1
-                Toast(text: "Saved")
+                let _ = Toast(text: "Saved")
+                self.status!.onSave()
             } else {
                 self.foldView.alpha = 0
-                Toast(text: "Unsaved")
+                let _ = Toast(text: "Unsaved")
+                self.status!.onUnsave()
             }
         }
     }

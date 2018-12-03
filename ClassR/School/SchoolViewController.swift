@@ -16,7 +16,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var savedSchoolDatabaseID = ""
     
-    var appDelegate : AppDelegate? = UIApplication.shared.delegate as! AppDelegate
+    var appDelegate : AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     var context : NSManagedObjectContext?
     var settings:NSManagedObject?
     
@@ -53,7 +53,6 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
             settings = NSManagedObject(entity: entity!, insertInto: context)
             settings!.setValue(schools[indexPath.row]!.databaseID, forKey: "school")
             try context!.save()
-            print(settings)
         } catch {
             print("Failed saving")
         }
@@ -64,7 +63,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         loadSchools()
         
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate = UIApplication.shared.delegate as? AppDelegate
         context = appDelegate!.persistentContainer.viewContext
         
         
@@ -89,9 +88,6 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } catch {
             print("error with coredata")
         }
-        
-        
-        
     }
     
     func loadSchools() {
@@ -123,9 +119,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
             (error) in
             print(error.localizedDescription)
         }
-        
         schoolTableView.reloadData()
-        
         
     }
     

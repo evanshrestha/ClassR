@@ -20,6 +20,8 @@ class NewsViewController: UITableViewController {
     
     private let pulldownRefreshControl = UIRefreshControl()
     
+    var showSavedOnly : Bool = false
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let emptyLabel = UILabel()
         emptyLabel.text = "Nothing seems to be here yet"
@@ -34,9 +36,37 @@ class NewsViewController: UITableViewController {
         return Status.statuses.count
     }
     
+    
+    @IBAction func onOptionsClick(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let photoAction = UIAlertAction(title: "Create a Post", style: .default) { (_) in
+            self.performSegue(withIdentifier: "showAddPost", sender: self)
+        }
+        let libraryAction = UIAlertAction(title: "Toggle Saved Posts", style: .default) { (_) in
+            self.showSavedOnly = !self.showSavedOnly
+            self.reloadStatuses()
+//            if (self.showSavedOnly) {
+//                let _ = Toast(text: "Showing saved posts")
+//            } else {
+//                let _ = Toast(text: "Showing all posts")
+//            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        
+        alertController.addAction(photoAction)
+        alertController.addAction(libraryAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true) {
+            
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let statusDatabaseID = Status.statuses[Status.statuses.count - indexPath.row - 1]?.keys.first {
+            
+            // Get status in reverse order to show newest first
             let status = Status.statuses[Status.statuses.count - indexPath.row - 1]![statusDatabaseID]!
             
             
@@ -53,19 +83,16 @@ class NewsViewController: UITableViewController {
                 }
                 cell.statusTextLabel.text = statusText
                 
+                // Transfer status to cell
                 cell.status = status
                 
                 if status.uuid == UIDevice.current.identifierForVendor!.uuidString {
-                    let n = Int.random(in: 0..<16*16*16*16*16*16)
-                    var st = String(format:"%06X", n)
                     cell.ribbonView.isHidden = false
                 } else {
-                    let n = Int.random(in: 0..<16*16*16*16*16*16)
-                    var st = String(format:"%06X", n)
-                    
                     cell.ribbonView.isHidden = true
                 }
                 
+                // Set initial like status
                 if (status.liked) {
                     cell.likeButton.setTitle("Liked", for: .normal)
                     cell.likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
@@ -93,16 +120,18 @@ class NewsViewController: UITableViewController {
                     }
                 }
                 
-                cell.foldView.color = cell.backgroundColor!
                 cell.foldView.foldColor = cell.courseNameLabel.textColor
+
                 
-                if (cell.folded) {
+                if (status.saved) {
                     cell.foldView.alpha = 1
                 } else {
                     cell.foldView.alpha = 0
                 }
                 
                 cell.updateLikeButton()
+                
+                cell.likeCountLabel.text = String(status.likeCount)
                 
                 return cell
             } else {
@@ -120,14 +149,9 @@ class NewsViewController: UITableViewController {
                 cell.status = status
                 
                 if status.uuid == UIDevice.current.identifierForVendor!.uuidString {
-                    let n = Int.random(in: 0..<16*16*16*16*16*16)
-                    var st = String(format:"%06X", n)
                     cell.ribbonView.isHidden = false
                     cell.circleView.isHidden = true
                 } else {
-                    let n = Int.random(in: 0..<16*16*16*16*16*16)
-                    var st = String(format:"%06X", n)
-                    
                     cell.ribbonView.isHidden = true
                     cell.circleView.isHidden = true
                 }
@@ -140,17 +164,18 @@ class NewsViewController: UITableViewController {
                     cell.likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
                 }
                 
-                cell.foldView.color = cell.backgroundColor!
                 cell.foldView.foldColor = cell.classNameLabel.textColor
                 
-                if (cell.folded) {
+                if (status.saved) {
                     cell.foldView.alpha = 1
                 } else {
                     cell.foldView.alpha = 0
                 }
                 
                 
+                
                 cell.updateLikeButton()
+                cell.likeCountLabel.text = String(status.likeCount)
                 return cell
             }
         }
@@ -175,6 +200,8 @@ class NewsViewController: UITableViewController {
         
         newsNavigationItem.title = School.selectedSchool?.nickname
         
+        Status.loadSavedStatuses()
+        
     }
     
     @objc func reloadStatuses() {
@@ -183,7 +210,7 @@ class NewsViewController: UITableViewController {
             self.newsTableView.reloadData()
         })
         
-        Status.loadStatuses(schoolDatabaseID: School.selectedSchoolDatabaseID, onLoadedStatus: {
+        Status.loadStatuses(schoolDatabaseID: School.selectedSchoolDatabaseID, savedOnly: showSavedOnly, onLoadedStatus: {
             self.newsTableView.reloadData()
         })
         
@@ -217,7 +244,7 @@ class NewsViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        Toast(text: "Say hi to \(School.selectedSchool?.nickname ?? "your school")")
+        _ = Toast(text: "Say hi to \(School.selectedSchool?.nickname ?? "your school")")
     }
     
     override func viewWillAppear(_ animated: Bool) {

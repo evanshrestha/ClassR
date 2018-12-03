@@ -11,8 +11,8 @@ import UIKit
 @IBDesignable
 class FoldView: UIView {
 
-    var color:UIColor = UIColor.blue
-    var foldColor:UIColor = UIColor.lightGray
+    @IBInspectable var color:UIColor = UIColor.blue
+    @IBInspectable var foldColor:UIColor = UIColor.lightGray
     
     override func draw(_ rect: CGRect) {
         var path = UIBezierPath()

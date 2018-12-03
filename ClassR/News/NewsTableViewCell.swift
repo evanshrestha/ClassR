@@ -19,9 +19,9 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var ribbonView: RibbonView!
     @IBOutlet weak var circleView: CircleView!
     @IBOutlet weak var foldView: FoldView!
+    @IBOutlet weak var likeCountLabel: UILabel!
     
     var status : Status?
-    var folded: Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -43,13 +43,14 @@ class NewsTableViewCell: UITableViewCell {
     @objc func onFoldTap(sender: UIGestureRecognizer) {
         
         if (self.foldView.bounds.contains(sender.location(in: self.foldView))) {
-            self.folded = !self.folded
-            if (self.folded) {
+            if (!status!.saved) {
                 self.foldView.alpha = 1
-                Toast(text: "Saved")
+                let _ = Toast(text: "Saved")
+                self.status!.onSave()
             } else {
                 self.foldView.alpha = 0
-                Toast(text: "Unsaved")
+                let _ = Toast(text: "Unsaved")
+                self.status!.onUnsave()
             }
         }
     }
@@ -73,9 +74,11 @@ class NewsTableViewCell: UITableViewCell {
     func updateLikeButton() {
         if (status!.liked) {
             likeButton.setTitle("Liked", for: .normal)
+            likeCountLabel.textColor = UIColor(hexString: "#00A8E8")
             likeButton.setTitleColor(UIColor(hexString: "#00A8E8"), for: .normal)
         } else {
             likeButton.setTitle("Like", for: .normal)
+            likeCountLabel.textColor = UIColor(hexString: "#6F7179")
             likeButton.setTitleColor(UIColor(hexString: "#6F7179"), for: .normal)
         }
     }
@@ -85,8 +88,9 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     func onLike() {
-        status!.liked = !status!.liked
+        status!.onLike()
         updateLikeButton()
+        self.likeCountLabel.text = String(status!.likeCount)
     }
     
     @IBAction func onCommentsTap(_ sender: Any) {

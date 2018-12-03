@@ -116,7 +116,11 @@ class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerCon
     @IBAction func onOptionsClick(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let photoAction = UIAlertAction(title: "Take Photo...", style: .default) { (_) in }
+        let photoAction = UIAlertAction(title: "Take Photo...", style: .default) { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
         let libraryAction = UIAlertAction(title: "Choose from Library...", style: .default) { (_) in
             self.imagePicker.allowsEditing = false
             self.imagePicker.sourceType = .photoLibrary
