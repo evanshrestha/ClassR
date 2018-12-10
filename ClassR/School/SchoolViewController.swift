@@ -127,6 +127,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showSchoolPosts") {
+            _ = Toast(text: "Say hi to \(School.selectedSchool?.nickname ?? "your school")")
             //(segue.destination as! NewsViewController).schoolDatabaseID = self.selectedSchoolDatabaseID
         }
     }

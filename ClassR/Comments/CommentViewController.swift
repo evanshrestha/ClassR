@@ -16,6 +16,16 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var commentTableView: CommentTableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let emptyLabel = UILabel()
+        emptyLabel.text = "Nothing seems to be here yet"
+        emptyLabel.textColor = UIColor.white
+        emptyLabel.font = UIFont(name: "Open Sans", size: CGFloat(17))
+        emptyLabel.textAlignment = NSTextAlignment.center
+        if Comment.comments.count == 0 {
+            self.commentTableView.backgroundView = emptyLabel
+        } else {
+            self.commentTableView.backgroundView = nil
+        }
         return Comment.comments.count + 1
     }
     

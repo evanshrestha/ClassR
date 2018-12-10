@@ -59,6 +59,8 @@ class NewsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(onDoubleTap(sender:)))
+        
+        
         doubleTapGesture.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTapGesture)
         

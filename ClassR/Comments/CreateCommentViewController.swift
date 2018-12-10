@@ -18,6 +18,8 @@ class CreateCommentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.replyTextView.layer.borderWidth = CGFloat(1)
+        self.replyTextView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     @IBAction func onCommentPostButtonClick(_ sender: Any) {

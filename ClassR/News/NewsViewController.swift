@@ -11,6 +11,8 @@ import Firebase
 
 class NewsViewController: UITableViewController {
     
+    let imageCache = NSCache<NSString, UIImage>()
+    
     @IBOutlet weak var newsTableView: NewsTableView!
     
     @IBOutlet weak var newsNavigationItem: UINavigationItem!
@@ -37,7 +39,10 @@ class NewsViewController: UITableViewController {
     }
     
     
-    @IBAction func onOptionsClick(_ sender: Any) {
+    @IBAction func onOptionsClick(_ sender: UIBarButtonItem) {
+        
+        Toast.remove()
+        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let photoAction = UIAlertAction(title: "Create a Post", style: .default) { (_) in
@@ -52,14 +57,15 @@ class NewsViewController: UITableViewController {
 //                let _ = Toast(text: "Showing all posts")
 //            }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        }
         
         alertController.addAction(photoAction)
         alertController.addAction(libraryAction)
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true) {
-            
-        }
+        alertController.popoverPresentationController?.sourceView = self.view
+        alertController.popoverPresentationController?.sourceRect = (CGRect(x: UIScreen.main.bounds.width - 30, y: 0, width: 10, height: 0))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,28 +113,36 @@ class NewsViewController: UITableViewController {
                 // Load image
                 let imageRef = Storage.storage().reference(withPath: "images/" + School.selectedSchoolDatabaseID + "/" + status.imageReferencePath)
                 
-                // Max size is 10MB
-                imageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
-                    if error != nil {
-                        print("ERROR WITH DOWNLOADING IMAGE")
-                    } else {
-                        let image = UIImage(data: data!)
-                        let ratio = image!.size.width / image!.size.height
-                        let newHeight = cell.statusImageView.frame.width / ratio
-                        cell.statusImageView.image = image
-                        cell.imageHeightConstraint.constant = newHeight
+                if let cachedImage = imageCache.object(forKey: status.imageReferencePath as NSString) {
+                    cell.statusImageView.image = cachedImage
+                } else {
+                
+                    // Max size is 10MB
+                    imageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
+                        if error != nil {
+                            print("ERROR WITH DOWNLOADING IMAGE: \(String(describing: error))")
+                        } else {
+                            
+                            // Set cell image
+                            let image = UIImage(data: data!)
+                            cell.statusImageView.image = image
+                            
+                            self.imageCache.setObject(image!, forKey: status.imageReferencePath as NSString)
+                            
+                        }
                     }
                 }
                 
                 cell.foldView.foldColor = cell.courseNameLabel.textColor
 
-                
+                // Change fold visual status
                 if (status.saved) {
                     cell.foldView.alpha = 1
                 } else {
                     cell.foldView.alpha = 0
                 }
                 
+                // Change like buttom visual status
                 cell.updateLikeButton()
                 
                 cell.likeCountLabel.text = String(status.likeCount)
@@ -244,7 +258,6 @@ class NewsViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        _ = Toast(text: "Say hi to \(School.selectedSchool?.nickname ?? "your school")")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -253,3 +266,13 @@ class NewsViewController: UITableViewController {
     
 }
 
+extension UIBarButtonItem {
+    
+    var frame: CGRect? {
+        guard let view = self.value(forKey: "view") as? UIView else {
+            return nil
+        }
+        return view.frame
+    }
+    
+}

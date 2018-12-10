@@ -12,46 +12,42 @@ import UIKit
 class Toast {
     
     var animationGroup = CAAnimationGroup()
-    var lbl:UILabel = UILabel()
+    static var toastLbls : Array<UILabel> = []
+    
+    static func remove() {
+        for lbl in toastLbls {
+            lbl.removeFromSuperview()
+        }
+        toastLbls.removeAll()
+    }
     
     init(text:String) {
         
         let vc = UIApplication.shared.keyWindow!
+        let lbl = UILabel()
+        
         
         let height = CGFloat(64)
         lbl.text = text
         lbl.backgroundColor = UIColor(hexString: "#80DBFF")
         lbl.textColor = UIColor.white
         lbl.font = UIFont.init(descriptor: UIFontDescriptor(name: "Open Sans", size: CGFloat(24)), size: CGFloat(24))
+        lbl.adjustsFontSizeToFitWidth = true
         lbl.textAlignment = .center
-        
-        //Step 1
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        
-        //Step 2
         vc.addSubview(lbl)
-        
-        //Step 3
-//        NSLayoutConstraint.activate([
-//
-//            lbl.leadingAnchor.constraint(equalTo: vc.view.safeAreaLayoutGuide.leadingAnchor),
-//            lbl.trailingAnchor.constraint(equalTo: vc.view.safeAreaLayoutGuide.trailingAnchor),
-//            lbl.topAnchor.constraint(equalTo: vc.view.safeAreaLayoutGuide.bottomAnchor,constant: -height),
-//            lbl.bottomAnchor.constraint(equalTo: vc.view.safeAreaLayoutGuide.bottomAnchor),
-//            ])
-//        self.lbl.alpha = 0
-        
-        self.lbl.frame.size.height = height
-        self.lbl.frame.origin.x = 0
-        self.lbl.frame.size.width = UIScreen.main.bounds.width
-        self.lbl.frame.origin.y = UIScreen.main.bounds.height
+        lbl.frame.size.height = height
+        lbl.frame.origin.x = 0
+        lbl.frame.size.width = UIScreen.main.bounds.width
+        lbl.frame.origin.y = UIScreen.main.bounds.height
+        Toast.toastLbls.append(lbl)
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.lbl.frame.origin.y = UIScreen.main.bounds.height - height
+            lbl.frame.origin.y = UIScreen.main.bounds.height - height
         }, completion: { (_) in
             UIView.animate(withDuration: 0.5, delay: 2, options: .curveEaseInOut, animations: {
-            self.lbl.frame.origin.y = UIScreen.main.bounds.height
+            lbl.frame.origin.y = UIScreen.main.bounds.height
             }, completion: { (_) in
-            self.lbl.removeFromSuperview()
+            lbl.removeFromSuperview()
             })}
         )
         

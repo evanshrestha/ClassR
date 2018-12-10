@@ -21,7 +21,7 @@ class CommentHeaderTableViewCell: UITableViewCell {
     }
     
     @IBAction func onLike(_ sender: Any) {
-        status!.liked = !status!.liked
+        status?.onLike()
         updateLikeStatus()
     }
     

@@ -17,37 +17,39 @@ class CourseCreationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var courseIDTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    static var courseSearchViewController: CourseSearchViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let contentInsets = UIEdgeInsets(top: keyboardSize.height, left: 0, bottom: 0, right: 0)
-            scrollView.contentInset = contentInsets
-            scrollView.scrollIndicatorInsets = contentInsets
-            print(self.view.frame.origin.y)
-            if self.view.frame.origin.y == 64 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//            let contentInsets = UIEdgeInsets(top: keyboardSize.height, left: 0, bottom: 0, right: 0)
+//            scrollView.contentInset = contentInsets
+//            scrollView.scrollIndicatorInsets = contentInsets
+//            print(self.view.frame.origin.y)
+//            if self.view.frame.origin.y == 64 {
+//                self.view.frame.origin.y -= keyboardSize.height
+//            }
+//        }
+//    }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            scrollView.contentInset = contentInsets
-            scrollView.scrollIndicatorInsets = contentInsets
-            
-            print(self.view.frame.origin.y)
-            if self.view.frame.origin.y != 64{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
-    }
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            scrollView.contentInset = contentInsets
+//            scrollView.scrollIndicatorInsets = contentInsets
+//
+//            print(self.view.frame.origin.y)
+//            if self.view.frame.origin.y != 64{
+//                self.view.frame.origin.y += keyboardSize.height
+//            }
+//        }
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -66,22 +68,25 @@ class CourseCreationViewController: UIViewController, UITextFieldDelegate {
             let coursePeriod = coursePeriodTextField.text,
             let courseID = courseIDTextField.text {
             
+            if (courseName.isEmpty || courseDepartment.isEmpty || courseNumber.isEmpty || courseInstructor.isEmpty || coursePeriod.isEmpty || courseID.isEmpty) {
+                _ = Toast(text: "Please fill out all fields")
+                return
+            }
             let currentCourse : Course = Course(courseName: courseName, courseDepartment: courseDepartment, courseNumber: courseNumber, courseInstructor: courseInstructor, courseID: courseID, coursePeriod: coursePeriod)
             
             currentCourse.addToDatabase()
+            
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+                Course.loadCourses(schoolDatabaseID: School.selectedSchoolDatabaseID, completion: {
+                    CourseCreationViewController.courseSearchViewController!.courseSearchTableView.reloadData()
+                })
+                _ = Toast(text: "Course added")
+            }
+            
         }
         
         
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

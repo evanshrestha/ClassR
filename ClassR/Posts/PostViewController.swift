@@ -26,6 +26,12 @@ class PostViewController: UIViewController, UITextViewDelegate, UIImagePickerCon
     @IBAction func onPostButtonClick(_ sender: Any) {
         
         if (postTextField.text.isEmpty || selectedCourse == nil) {
+            if (selectedCourse == nil) {
+                _ = Toast(text: "Please select a course")
+            } else {
+                _ = Toast(text: "Please create a title")
+            }
+            
             return
         }
         

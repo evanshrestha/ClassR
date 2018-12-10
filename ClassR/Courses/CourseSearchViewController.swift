@@ -61,9 +61,10 @@ class CourseSearchViewController: UIViewController, UITableViewDelegate, UITable
         return CGFloat(100)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        CourseCreationViewController.courseSearchViewController = self
         
         Course.loadCourses(schoolDatabaseID: School.selectedSchoolDatabaseID, completion: {
             self.courseSearchTableView.reloadData()

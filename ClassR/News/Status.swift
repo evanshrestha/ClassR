@@ -10,7 +10,10 @@ import Foundation
 import Firebase
 import CoreData
 
+// "Status" is inconsistent with "News" because I can't make up my mind
 class Status {
+    
+    // Initialize a bunch of stuff
     var courseReferenceID : String = ""
     var statusText : String = ""
     var datePosted : Date = Date()
