@@ -9,9 +9,10 @@
 import UIKit
 import Firebase
 
-class CreateCommentViewController: UIViewController {
+class CreateCommentViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var nicknameLabel: UITextField!
     @IBOutlet weak var replyTextView: UITextView!
+    @IBOutlet weak var backgroundView: UIView!
     
     var selectedStatus : Status?
     var commentViewController : CommentViewController?
@@ -20,9 +21,33 @@ class CreateCommentViewController: UIViewController {
         super.viewDidLoad()
         self.replyTextView.layer.borderWidth = CGFloat(1)
         self.replyTextView.layer.borderColor = UIColor.lightGray.cgColor
+        self.nicknameLabel.delegate = self
+        self.replyTextView.delegate = self
+        let outsideTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onOutsideTap))
+        backgroundView.addGestureRecognizer(outsideTapGestureRecognizer)
+    }
+    
+    @objc func onOutsideTap() {
+        replyTextView.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func onCommentPostButtonClick(_ sender: Any) {
+        
+        if (nicknameLabel.text!.isEmpty) {
+            _ = Toast(text: "Please enter a nickname")
+            return
+        }
+        
+        if (replyTextView.text!.isEmpty) {
+            _ = Toast(text: "Please enter a reply")
+            return
+        }
+        
         postComment()
     }
     

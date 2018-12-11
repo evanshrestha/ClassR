@@ -12,7 +12,7 @@ import Firebase
 class NewsViewController: UITableViewController {
     
     let imageCache = NSCache<NSString, UIImage>()
-    
+    let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as String
     @IBOutlet weak var newsTableView: NewsTableView!
     
     @IBOutlet weak var newsNavigationItem: UINavigationItem!
@@ -115,7 +115,14 @@ class NewsViewController: UITableViewController {
                 
                 if let cachedImage = imageCache.object(forKey: status.imageReferencePath as NSString) {
                     cell.statusImageView.image = cachedImage
+                    print("Loaded \(status.imageReferencePath) from cache")
                 } else {
+                    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    let filePath = documentsURL.appendingPathComponent(status.imageReferencePath).path
+                    if FileManager.default.fileExists(atPath: filePath) {
+                        cell.statusImageView.image = UIImage(contentsOfFile: filePath)
+                        print("Loaded \(status.imageReferencePath) from local storage")
+                    } else {
                 
                     // Max size is 10MB
                     imageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
@@ -128,8 +135,20 @@ class NewsViewController: UITableViewController {
                             cell.statusImageView.image = image
                             
                             self.imageCache.setObject(image!, forKey: status.imageReferencePath as NSString)
+                            print("Saved \(status.imageReferencePath) to cache")
                             
+                            do {
+                                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                                let fileURL = documentsURL.appendingPathComponent(status.imageReferencePath)
+                                if let jpgData = image!.jpegData(compressionQuality: 0.8) {
+                                    try jpgData.write(to: fileURL, options: .atomic)
+                                }
+                                print("Saved \(status.imageReferencePath) to local storage")
+                            } catch {
+                                print("Error saving \(status.imageReferencePath) to local storage")
+                            }
                         }
+                    }
                     }
                 }
                 

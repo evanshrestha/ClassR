@@ -1328,6 +1328,7 @@
                         <viewLayoutGuide key="safeArea" id="MAP-3s-YWP"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="S4N-ms-WHr" id="0Ue-KI-QMa"/>
                         <outlet property="nicknameLabel" destination="VUL-xU-ZyH" id="wU2-fb-UVR"/>
                         <outlet property="replyTextView" destination="Mgv-nl-VYm" id="O2a-Vm-SBo"/>
                     </connections>
